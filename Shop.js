@@ -9,3 +9,4 @@ iconCart.addEventListener('click', () =>{
 closeCart.addEventListener('click', () =>{
     body.classList.toggle('showCart')
 })
+
