@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,900&display=swap');
+
+body{
+font-family: 'Poppins', sans-serif;
+margin: 0;
+}
+
+.container{
+    width: 900px;
+    max-width: 90vw;
+    margin: auto;
+    text-align: center;
+    padding-top: 10px;
+}
+
+svg{
+    width: 30px;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+header .icon-cart{
+    position: relative;
+}
+
+header .icon-cart span{
+    display: flex;
+    width: 25px;
+    height: 25px;
+    background-color: red;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 45%;
+    right: -38%;
+}
+
+.icon-cart .item image{
+    width: 90%;
+    filter: drop-shadow(0 50px 20px #0009);
+}
+
+.listProduct{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.listProduct .item{
+    background-color: #eeeee6;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.listProduct .item h2{
+    font-weight: 500;
+    font-size: large;
+}
+
+.listProduct .item .price{
+    letter-spacing: 7px;
+    font-size: small;
+}
+
+.listProduct .item button{
+    background-color: #353432;
+    color: #eee;
+    padding: 5px;
+    border-radius: 20px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+}
