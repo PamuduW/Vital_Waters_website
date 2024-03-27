@@ -115,12 +115,13 @@ const addToCart = (product_id) => {
 
 const addCartToHTML = () => {
   listCartHTML.innerHTML = "";
-  let totalQuantity = 0
+  let totalQuantity = 0;
   if (carts.length > 0) {
     carts.forEach((cart) => {
       totalQuantity = totalQuantity + cart.quantity;
       let newCart = document.createElement("div");
       newCart.classList.add("item");
+      newCart.dataset.id = cart.product_id;
       let positionProduct = listProducts.findIndex(
         (value) => value.id == cart.product_id
       );
@@ -131,7 +132,7 @@ const addCartToHTML = () => {
         '" alt="T-shirt_1" width="181px" height="200px"> </div> <div class="name">' +
         info.name +
         '</div> <div class="totalPrice">&#163;' +
-        (info.price * cart.quantity)+
+        info.price * cart.quantity +
         '</div> <div class="quantity"> <span class="minus"></span> <span>' +
         cart.quantity +
         '</span> <span class="plus"></span> </div>';
@@ -141,6 +142,41 @@ const addCartToHTML = () => {
   iconCartSpan.innerText = totalQuantity;
 };
 
+listCartHTML.addEventListener(".click", (event) => {
+  let positionClick = event.target;
+  if (
+    positionClick.classList.contains("minus") ||
+    positionClick.classList.contains("plus")
+  ) {
+    let product_id = positionClick.parentElement.parentElement.dataset.id;
+    let type = "minus";
+    if (positionClick.classList.contains("plus")) {
+      type = "plus";
+    }
+    changeQuantity(product_id, type);
+  }
+});
 
+const changeQuantity = (product_id, type) => {
+  let positionItemInCart = carts.findIndex(
+    (value) => value.product_id == product_id
+  );
+  if (positionItemInCart >= 0) {
+    switch (type) {
+      case "plus":
+        carts[positionItemInCart].quantity += 1;
+        break;
+      default:
+        let valueChange = carts[positionItemInCart].quantity - 1;
+        if (valueChange > 0) {
+          carts[positionItemInCart].quantity = valueChange;
+        } else {
+          carts.splice(positionItemInCart, 1);
+        }
+        break;
+    }
+  }
+  addCartToHTML();
+};
 
 addDataToHTML();
