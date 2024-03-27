@@ -67,20 +67,22 @@ closeCart.addEventListener("click", () => {
 
 const addDataToHTML = () => {
   listProductHTML.innerHTML = "";
-  listProducts.forEach((product) => {
-    let newProduct = document.createElement("div");
-    newProduct.classList.add("item");
-    newProduct.dataset.id = product.id;
-    newProduct.innerHTML =
-      '<img src="' +
-      product.image +
-      '" alt="T-shirt_1" width="181px" height="200px"><h2>' +
-      product.name +
-      '</h2> <div class="price">&#163;' +
-      product.price +
-      '</div> <button class="addCart">Add to Cart</button>';
-    listProductHTML.appendChild(newProduct);
-  });
+  if (listProducts.length > 0) {
+    listProducts.forEach((product) => {
+      let newProduct = document.createElement("div");
+      newProduct.classList.add("item");
+      newProduct.dataset.id = product.id;
+      newProduct.innerHTML =
+        '<img src="' +
+        product.image +
+        '" alt="T-shirt_1" width="181px" height="200px"><h2>' +
+        product.name +
+        '</h2> <div class="price">&#163;' +
+        product.price +
+        '</div> <button class="addCart">Add to Cart</button>';
+      listProductHTML.appendChild(newProduct);
+    });
+  }
 };
 
 listProductHTML.addEventListener("click", (event) => {
@@ -118,7 +120,7 @@ const addCartToHTML = () => {
   let totalQuantity = 0;
   if (carts.length > 0) {
     carts.forEach((cart) => {
-      totalQuantity = totalQuantity + cart.quantity;
+      totalQuantity += cart.quantity;
       let newCart = document.createElement("div");
       newCart.classList.add("item");
       newCart.dataset.id = cart.product_id;
@@ -133,16 +135,16 @@ const addCartToHTML = () => {
         info.name +
         '</div> <div class="totalPrice">&#163;' +
         info.price * cart.quantity +
-        '</div> <div class="quantity"> <span class="minus"></span> <span>' +
+        '</div> <div class="quantity"> <span class="minus"><</span> <span>' +
         cart.quantity +
-        '</span> <span class="plus"></span> </div>';
+        '</span> <span class="plus">></span> </div>';
       listCartHTML.appendChild(newCart);
     });
   }
   iconCartSpan.innerText = totalQuantity;
 };
 
-listCartHTML.addEventListener(".click", (event) => {
+listCartHTML.addEventListener("click", (event) => {
   let positionClick = event.target;
   if (
     positionClick.classList.contains("minus") ||
