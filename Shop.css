@@ -60,13 +60,32 @@ header .icon-cart span {
     border-radius: 20px;
 }
 
+.listProduct .item span {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-top: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.listProduct .item .color1{
+    background-color: black;
+    margin-right: 5px;
+}
+
+.listProduct .item .color2{
+    background-color: white;
+    margin-left: 5px;
+}
+
 .listProduct .item h2 {
     font-weight: 500;
     font-size: large;
 }
 
 .listProduct .item .price {
-    letter-spacing: 7px;
+    letter-spacing: 1px;
     font-size: small;
 }
 

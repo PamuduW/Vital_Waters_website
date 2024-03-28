@@ -77,7 +77,7 @@ const addDataToHTML = () => {
         product.image +
         '" alt="T-shirt_1" width="181px" height="200px"><h2>' +
         product.name +
-        '</h2> <div class="price">&#163;' +
+        '<div class="colorchoise"> <span class="color1"></span> <span class="color2"></span> </div></h2> <div class="price">&#163; ' +
         product.price +
         '</div> <button class="addCart">Add to Cart</button>';
       listProductHTML.appendChild(newProduct);
