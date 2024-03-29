@@ -69,12 +69,12 @@ header .icon-cart span {
     cursor: pointer;
 }
 
-.listProduct .item .color1{
+.listProduct .item .color1 {
     background-color: black;
     margin-right: 5px;
 }
 
-.listProduct .item .color2{
+.listProduct .item .color2 {
     background-color: white;
     margin-left: 5px;
 }
@@ -131,7 +131,8 @@ body.showCart .container {
 
 .cartTab .btn button {
     background-color: #e8bc0e;
-    border: none;
+    margin: 3px;
+    border-radius: 20px;
     font-family: Poppins;
     font-weight: 500;
     cursor: pointer;
@@ -180,14 +181,14 @@ body.showCart .container {
     width: 0;
 }
 
-@media screen and ( max-width:992px){
-    .listProduct{
+@media screen and (max-width:992px) {
+    .listProduct {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media screen and ( max-width:768px){
-    .listProduct{
+@media screen and (max-width:768px) {
+    .listProduct {
         grid-template-columns: repeat(2, 1fr);
     }
 }

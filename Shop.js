@@ -181,4 +181,8 @@ const changeQuantity = (product_id, type) => {
   addCartToHTML();
 };
 
+function checkOut(){
+  window.location.href = "Checkout.html";
+}
+
 addDataToHTML();
