@@ -60,7 +60,7 @@ header .icon-cart span {
     border-radius: 20px;
 }
 
-.listProduct .item span {
+.color1, .color2 {
     display: inline-block;
     width: 25px;
     height: 25px;

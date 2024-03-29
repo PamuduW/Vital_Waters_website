@@ -20,13 +20,13 @@ let listProducts = [
   },
   {
     id: 2,
-    name: "T-shirt 2",
+    name: "Coffee-Mug",
     price: 200,
     color: ["black", "white"],
-    alt: "T-shirt 2",
+    alt: "Coffee-Mug",
     image: [
-      "Pictures/Shop/T-shirt2_black.png",
-      "Pictures/Shop/T-shirt2_white.png",
+      "Pictures/Shop/coffee-mug_black.png",
+      "Pictures/Shop/coffee-mug_white.png",
     ],
   },
 ];
@@ -41,17 +41,18 @@ closeCart.addEventListener("click", () => {
 
 const addDataToHTML = () => {
   listProductHTML.innerHTML = "";
+  let colorChoiseOpt = 0
   if (listProducts.length > 0) {
     listProducts.forEach((product) => {
       let newProduct = document.createElement("div");
       newProduct.classList.add("item");
       newProduct.dataset.id = product.id;
       newProduct.innerHTML = `
-        <img src="${product.image}" alt="${product.alt}" width="181px" height="200px"> 
+        <img src="${product.image[colorChoiseOpt]}" alt="${product.alt}" width="181px" height="200px"> 
         <h2>${product.name}</h2> 
         <div class="colorchoise">
-          <span class="color1"></span> 
-          <span class="color2"></span> 
+          <input class="color1" type="radio" name="${product.name}" id="0" value="0" checked>
+          <input class="color2" type="radio" name="${product.name}" id="1" value="1">
         </div> 
         <div class="price">&#163; ${product.price}</div> 
         <button class="addCart">
@@ -62,6 +63,25 @@ const addDataToHTML = () => {
     });
   }
 };
+
+// Add event listener to color choise radio buttons
+listProductHTML.addEventListener("change", (event) => {
+  if (event.target.classList.contains("color1") || event.target.classList.contains("color2")) {
+    let product_id = event.target.parentElement.parentElement.dataset.id;
+    let colorChoiseOpt = event.target.value;
+    updateProductImage(product_id, colorChoiseOpt);
+  }
+});
+
+// Function to update product image according to the chosen color
+const updateProductImage = (product_id, colorChoiseOpt) => {
+  let productElements = document.querySelectorAll(`[data-id="${product_id}"] .item`);
+  if (productElements.length > 0) {
+    let productElement = productElements[0];
+    productElement.querySelector("img").src = listProducts.find(product => product.id == product_id).image[colorChoiseOpt];
+  }
+};
+
 
 listProductHTML.addEventListener("click", (event) => {
   let positionClick = event.target;
