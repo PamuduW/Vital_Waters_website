@@ -17,6 +17,16 @@ let listProducts = [
       "Pictures/Shop/T-shirt_white.png",
     ],
   },
+  {
+    id: 2,
+    name: "T-shirt 1",
+    price: 100,
+    color: ["black", "white"],
+    image: [
+      "Pictures/Shop/T-shirt_black.png",
+      "Pictures/Shop/T-shirt_white.png",
+    ],
+  },
 ];
 
 iconCart.addEventListener("click", () => {
@@ -84,6 +94,7 @@ const addToCart = (product_id) => {
 const addCartToHTML = () => {
   listCartHTML.innerHTML = "";
   let totalQuantity = 0;
+  let totalPrice = 0;
   if (carts.length > 0) {
     carts.forEach((cart) => {
       totalQuantity += cart.quantity;
@@ -94,6 +105,7 @@ const addCartToHTML = () => {
         (value) => value.id == cart.product_id
       );
       let info = listProducts[positionProduct];
+      totalPrice += info.price * cart.quantity;
       newCart.innerHTML = `<div class="image">
           <img src="${
             info.image
@@ -114,6 +126,7 @@ const addCartToHTML = () => {
     });
   }
   iconCartSpan.innerText = totalQuantity;
+  document.querySelector(".totalPriceFull").innerHTML = `Total Price : &#163;&nbsp;${totalPrice}`;
 };
 
 listCartHTML.addEventListener("click", (event) => {
