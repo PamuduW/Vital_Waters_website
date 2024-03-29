@@ -12,19 +12,21 @@ let listProducts = [
     name: "T-shirt 1",
     price: 100,
     color: ["black", "white"],
+    alt: "T-shirt 1",
     image: [
-      "Pictures/Shop/T-shirt_black.png",
-      "Pictures/Shop/T-shirt_white.png",
+      "Pictures/Shop/T-shirt1_black.png",
+      "Pictures/Shop/T-shirt1_white.png",
     ],
   },
   {
     id: 2,
-    name: "T-shirt 1",
-    price: 100,
+    name: "T-shirt 2",
+    price: 200,
     color: ["black", "white"],
+    alt: "T-shirt 2",
     image: [
-      "Pictures/Shop/T-shirt_black.png",
-      "Pictures/Shop/T-shirt_white.png",
+      "Pictures/Shop/T-shirt2_black.png",
+      "Pictures/Shop/T-shirt2_white.png",
     ],
   },
 ];
@@ -45,7 +47,7 @@ const addDataToHTML = () => {
       newProduct.classList.add("item");
       newProduct.dataset.id = product.id;
       newProduct.innerHTML = `
-        <img src="${product.image}" alt="T-shirt_1" width="181px" height="200px"> 
+        <img src="${product.image}" alt="${product.alt}" width="181px" height="200px"> 
         <h2>${product.name}</h2> 
         <div class="colorchoise">
           <span class="color1"></span> 
@@ -109,7 +111,7 @@ const addCartToHTML = () => {
       newCart.innerHTML = `<div class="image">
           <img src="${
             info.image
-          }" alt="T-shirt_1" width="181px" height="200px"> 
+          }" alt="${info.alt}" width="181px" height="200px"> 
         </div>
         <div class="name">
           ${info.name} 
