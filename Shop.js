@@ -154,7 +154,11 @@ const changeQuantity = (product_id, type) => {
 };
 
 function checkOut() {
-  window.location.href = "Checkout.html";
+  if (carts.length > 0) {
+    window.location.href = "Checkout.html";
+  }else{
+    alert("Plese select an item first")
+  }
 }
 
 addDataToHTML();
