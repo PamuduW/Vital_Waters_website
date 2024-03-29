@@ -11,49 +11,11 @@ let listProducts = [
     id: 1,
     name: "T-shirt 1",
     price: 100,
-    image: "Pictures/Shop/T-shirt_1.png",
-  },
-  {
-    id: 2,
-    name: "T-shirt 2",
-    price: 200,
-    image: "Pictures/Shop/T-shirt_2.png",
-  },
-  {
-    id: 3,
-    name: "T-shirt 3",
-    price: 300,
-    image: "Pictures/Shop/T-shirt_1.png",
-  },
-  {
-    id: 4,
-    name: "T-shirt 4",
-    price: 400,
-    image: "Pictures/Shop/T-shirt_2.png",
-  },
-  {
-    id: 5,
-    name: "T-shirt 5",
-    price: 500,
-    image: "Pictures/Shop/T-shirt_1.png",
-  },
-  {
-    id: 6,
-    name: "T-shirt 6",
-    price: 600,
-    image: "Pictures/Shop/T-shirt_2.png",
-  },
-  {
-    id: 7,
-    name: "T-shirt 7",
-    price: 700,
-    image: "Pictures/Shop/T-shirt_1.png",
-  },
-  {
-    id: 8,
-    name: "T-shirt 8",
-    price: 800,
-    image: "Pictures/Shop/T-shirt_2.png",
+    color: ["black", "white"],
+    image: [
+      "Pictures/Shop/T-shirt_black.png",
+      "Pictures/Shop/T-shirt_white.png",
+    ],
   },
 ];
 
@@ -72,14 +34,18 @@ const addDataToHTML = () => {
       let newProduct = document.createElement("div");
       newProduct.classList.add("item");
       newProduct.dataset.id = product.id;
-      newProduct.innerHTML =
-        '<img src="' +
-        product.image +
-        '" alt="T-shirt_1" width="181px" height="200px"><h2>' +
-        product.name +
-        '<div class="colorchoise"> <span class="color1"></span> <span class="color2"></span> </div></h2> <div class="price">&#163; ' +
-        product.price +
-        '</div> <button class="addCart">Add to Cart</button>';
+      newProduct.innerHTML = `
+        <img src="${product.image}" alt="T-shirt_1" width="181px" height="200px"> 
+        <h2>${product.name}</h2> 
+        <div class="colorchoise">
+          <span class="color1"></span> 
+          <span class="color2"></span> 
+        </div> 
+        <div class="price">&#163; ${product.price}</div> 
+        <button class="addCart">
+          Add to Cart
+        </button>
+        `;
       listProductHTML.appendChild(newProduct);
     });
   }
@@ -128,16 +94,22 @@ const addCartToHTML = () => {
         (value) => value.id == cart.product_id
       );
       let info = listProducts[positionProduct];
-      newCart.innerHTML =
-        '<div class="image"> <img src="' +
-        info.image +
-        '" alt="T-shirt_1" width="181px" height="200px"> </div> <div class="name">' +
-        info.name +
-        '</div> <div class="totalPrice">&#163;' +
-        info.price * cart.quantity +
-        '</div> <div class="quantity"> <span class="minus"><</span> <span>' +
-        cart.quantity +
-        '</span> <span class="plus">></span> </div>';
+      newCart.innerHTML = `<div class="image">
+          <img src="${
+            info.image
+          }" alt="T-shirt_1" width="181px" height="200px"> 
+        </div>
+        <div class="name">
+          ${info.name} 
+        </div> 
+        <div class="totalPrice">
+          &#163;${info.price * cart.quantity}
+        </div> 
+        <div class="quantity"> 
+          <span class="minus"><</span> 
+          <span>${cart.quantity}</span> 
+          <span class="plus">></span> 
+        </div>`;
       listCartHTML.appendChild(newCart);
     });
   }
@@ -181,7 +153,7 @@ const changeQuantity = (product_id, type) => {
   addCartToHTML();
 };
 
-function checkOut(){
+function checkOut() {
   window.location.href = "Checkout.html";
 }
 
