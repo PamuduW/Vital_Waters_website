@@ -187,7 +187,8 @@ const changeQuantity = (product_id, type, colorChoice) => {
 
 function checkOut() {
   if (carts.length > 0) {
-    window.location.href = "Checkout.html";
+    let totalPrice = document.querySelector(".totalPriceFull").innerText.replace("£", " £ ");
+    window.location.href = "Checkout.html?totalPrice=" + totalPrice;
   } else {
     alert("Plese select an item first");
   }

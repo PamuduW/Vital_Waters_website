@@ -9,10 +9,15 @@
     <link rel="stylesheet" href="Checkout.css">
 </head>
 
-<body class="">
+<body class="" onload="totalPricetext()">
     <form class="CheckoutForm" action="javascript:finishing()">
         <fieldset class="heading">
             <p><b>Almost there...</b><br>Fill in the detail below to complete your purchase</p>
+        </fieldset>
+
+        <fieldset class="bill">
+            <legend><b>Billing Information</b></legend>
+            <span id="total-price"></span>
         </fieldset>
 
         <fieldset class="personal">
@@ -58,24 +63,12 @@
         </fieldset>
 
         <fieldset class="buttons">
-            <input type="reset" name="reset" id="reset" value="reset" class="btn">
-            <input type="submit" name="send" id="send" value="send" class="btn">
+            <input type="reset" name="reset" id="reset" value="Reset" class="btn">
+            <input type="submit" name="Purchase" id="Purchase" value="Purchase" class="btn">
         </fieldset>
     </form>
 
-    <script type="text/javascript">
-        function finishing() {
-            document.body.innerHTML = '';
-            let message = document.createElement("div");
-            message.innerHTML = '<span class="message"><strong>Success!</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Redirecting back to the shop...</span>';
-            setTimeout(function () {
-                document.body.appendChild(message);
-            }, 800);
-            setTimeout(function () {
-                window.location.href = "Shop.html";
-            }, 2500);
-        }
-    </script>
+    <script src="Checkout.js"></script>
 </body>
 
 </html>
