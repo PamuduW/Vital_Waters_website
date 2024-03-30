@@ -70,12 +70,12 @@ header .icon-cart span {
 }
 
 .listProduct .item .color1 {
-    background-color: black;
+    accent-color: black;
     margin-right: 5px;
 }
 
 .listProduct .item .color2 {
-    background-color: white;
+    accent-color: white;
     margin-left: 5px;
 }
 

@@ -204,7 +204,6 @@ function checkOut() {
       }
       return {
         start: "...",
-        id: "/" + product.id + "/",
         name: "/" + product.name + "/",
         price: "/" + product.price + "/",
         quantity: "/" + item.quantity + "/",
