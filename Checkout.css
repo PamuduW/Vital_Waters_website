@@ -15,10 +15,14 @@ label {
     margin-left: 40px;
 }
 
-.bill span{
+.bill span {
     float: left;
-    width: 180px;
-    margin-left: 40px;
+    width: 280px;
+    margin-left: 80px;
+}
+
+.total-price{
+    margin-top: 400px;
 }
 
 .heading {

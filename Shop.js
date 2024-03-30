@@ -77,20 +77,25 @@ listProductHTML.addEventListener("click", (event) => {
   let positionClick = event.target;
   if (positionClick.classList.contains("addCart")) {
     let product_id = positionClick.parentElement.dataset.id;
-    let colorChoice = parseInt(positionClick.parentElement.querySelector(".color2").checked ? "1" : "0");
+    let colorChoice = parseInt(
+      positionClick.parentElement.querySelector(".color2").checked ? "1" : "0"
+    );
     addToCart(product_id, colorChoice);
   }
 });
 
 const addToCart = (product_id, colorChoice) => {
-  let productInCart = carts.find((value) => value.product_id == product_id && value.colorChoice == colorChoice);
+  let productInCart = carts.find(
+    (value) =>
+      value.product_id == product_id && value.colorChoice == colorChoice
+  );
   if (carts.length <= 0) {
     carts = [
       {
         product_id: product_id,
         quantity: 1,
         colorChoice: colorChoice,
-      }
+      },
     ];
   } else if (!productInCart) {
     carts.push({
@@ -117,11 +122,13 @@ const addCartToHTML = () => {
       let positionProduct = listProducts.findIndex(
         (value) => value.id == cart.product_id
       );
-      let info = listProducts[positionProduct]
+      let info = listProducts[positionProduct];
       totalPrice += info.price * cart.quantity;
       let selectedImage = info.image[cart.colorChoice];
       newCart.innerHTML = `<div class="image">
-          <img src="${selectedImage}" alt="${info.alt}" width="181px" height="200px">
+          <img src="${selectedImage}" alt="${
+        info.alt
+      }" width="181px" height="200px">
         </div>
         <div class="name">
           ${info.name} - Color: ${info.color[cart.colorChoice]}
@@ -187,10 +194,32 @@ const changeQuantity = (product_id, type, colorChoice) => {
 
 function checkOut() {
   if (carts.length > 0) {
-    let totalPrice = document.querySelector(".totalPriceFull").innerText.replace("£", " £ ");
-    window.location.href = "Checkout.html?totalPrice=" + totalPrice;
+    // Prepare an array of objects with item details
+    let cartDetails = carts.map((item) => {
+      let product = listProducts.find((p) => p.id == item.product_id);
+      if (item.colorChoice==0){
+        color="Black"
+      }else{
+        color="White"
+      }
+      return {
+        start: "...",
+        id: "/" + product.id + "/",
+        name: "/" + product.name + "/",
+        price: "/" + product.price + "/",
+        quantity: "/" + item.quantity + "/",
+        colorChoice: "/" + color + "/",
+      };
+    });
+
+    // Convert the array to a JSON string and URL-encode it
+    let encodedCartDetails = encodeURIComponent(JSON.stringify(cartDetails));
+    let totalPrice = document
+      .querySelector(".totalPriceFull")
+      .innerText.replace("£", " £ ");
+    window.location.href = `Checkout.html?totalPrice=${totalPrice}&cartDetails=${encodedCartDetails}`;
   } else {
-    alert("Plese select an item first");
+    alert("Please select an item first");
   }
 }
 
