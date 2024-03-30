@@ -11,8 +11,8 @@ function totalPricetext() {
     let itemDetails = items[i].split("/");
     cartItemsHTML += `<p>Item Name&nbsp;&nbsp;: ${itemDetails[1]} <br> 
     Item Color&nbsp;&nbsp;&nbsp;: ${itemDetails[7]} <br> 
-    Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${itemDetails[3]} <br> 
-    Quantity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:£ ${itemDetails[5]} </p>`;
+    Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: £ ${itemDetails[3]} <br> 
+    Quantity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: ${itemDetails[5]} </p>`;
   }
   cartDetailsElement.innerHTML = cartItemsHTML;
 }
