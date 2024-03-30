@@ -41,9 +41,9 @@ closeCart.addEventListener("click", () => {
 
 const addDataToHTML = () => {
   listProductHTML.innerHTML = "";
-  let colorChoiseOpt = 0
   if (listProducts.length > 0) {
     listProducts.forEach((product) => {
+      let colorChoiseOpt = 0
       let newProduct = document.createElement("div");
       newProduct.classList.add("item");
       newProduct.dataset.id = product.id;
@@ -63,25 +63,6 @@ const addDataToHTML = () => {
     });
   }
 };
-
-// Add event listener to color choise radio buttons
-listProductHTML.addEventListener("change", (event) => {
-  if (event.target.classList.contains("color1") || event.target.classList.contains("color2")) {
-    let product_id = event.target.parentElement.parentElement.dataset.id;
-    let colorChoiseOpt = event.target.value;
-    updateProductImage(product_id, colorChoiseOpt);
-  }
-});
-
-// Function to update product image according to the chosen color
-const updateProductImage = (product_id, colorChoiseOpt) => {
-  let productElements = document.querySelectorAll(`[data-id="${product_id}"] .item`);
-  if (productElements.length > 0) {
-    let productElement = productElements[0];
-    productElement.querySelector("img").src = listProducts.find(product => product.id == product_id).image[colorChoiseOpt];
-  }
-};
-
 
 listProductHTML.addEventListener("click", (event) => {
   let positionClick = event.target;
