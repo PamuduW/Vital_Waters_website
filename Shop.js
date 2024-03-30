@@ -77,11 +77,12 @@ listProductHTML.addEventListener("click", (event) => {
   let positionClick = event.target;
   if (positionClick.classList.contains("addCart")) {
     let product_id = positionClick.parentElement.dataset.id;
-    addToCart(product_id);
+    let colorChoice = parseInt(positionClick.parentElement.querySelector(".color2").checked ? "1" : "0");
+    addToCart(product_id, colorChoice);
   }
 });
 
-const addToCart = (product_id) => {
+const addToCart = (product_id, colorChoice) => {
   let positionThisProductInCart = carts.findIndex(
     (value) => value.product_id == product_id
   );
@@ -90,12 +91,14 @@ const addToCart = (product_id) => {
       {
         product_id: product_id,
         quantity: 1,
+        colorChoice: colorChoice,
       },
     ];
   } else if (positionThisProductInCart < 0) {
     carts.push({
       product_id: product_id,
       quantity: 1,
+      colorChoice: colorChoice,
     });
   } else {
     carts[positionThisProductInCart].quantity += 1;
@@ -116,16 +119,11 @@ const addCartToHTML = () => {
       let positionProduct = listProducts.findIndex(
         (value) => value.id == cart.product_id
       );
-      let info = listProducts[positionProduct];
+      let info = listProducts[positionProduct]
       totalPrice += info.price * cart.quantity;
-      let selectedImage = info.image[0];
-      if (cart.colorChoice !== undefined) {
-        selectedImage = info.image[cart.colorChoice];
-      }
+      let selectedImage = info.image[cart.colorChoice];
       newCart.innerHTML = `<div class="image">
-          <img src="${selectedImage}" alt="${
-        info.alt
-      }" width="181px" height="200px">
+          <img src="${selectedImage}" alt="${info.alt}" width="181px" height="200px">
         </div>
         <div class="name">
           ${info.name}
