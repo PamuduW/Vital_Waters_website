@@ -43,22 +43,31 @@ const addDataToHTML = () => {
   listProductHTML.innerHTML = "";
   if (listProducts.length > 0) {
     listProducts.forEach((product) => {
-      let colorChoiseOpt = 0
+      let colorChoiseOpt = 0;
       let newProduct = document.createElement("div");
       newProduct.classList.add("item");
       newProduct.dataset.id = product.id;
       newProduct.innerHTML = `
-        <img src="${product.image[colorChoiseOpt]}" alt="${product.alt}" width="181px" height="200px"> 
-        <h2>${product.name}</h2> 
+        <img src="${product.image[colorChoiseOpt]}" alt="${product.alt}" width="181px" height="200px" class="item-image">
+        <h2>${product.name}</h2>
         <div class="colorchoise">
           <input class="color1" type="radio" name="${product.name}" id="0" value="0" checked>
           <input class="color2" type="radio" name="${product.name}" id="1" value="1">
-        </div> 
-        <div class="price">&#163; ${product.price}</div> 
+        </div>
+        <div class="price">&#163; ${product.price}</div>
         <button class="addCart">
           Add to Cart
         </button>
         `;
+      const colorChoices = newProduct.querySelectorAll(".colorchoise input");
+      colorChoices.forEach((choice) => {
+        choice.addEventListener("change", (event) => {
+          const value = event.target.value;
+          const newImage = product.image[parseInt(value)];
+          newProduct.querySelector(".item-image").src = newImage;
+        });
+      });
+
       listProductHTML.appendChild(newProduct);
     });
   }
