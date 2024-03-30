@@ -147,7 +147,7 @@ const addCartToHTML = () => {
   iconCartSpan.innerText = totalQuantity;
   document.querySelector(
     ".totalPriceFull"
-  ).innerHTML = `Total Price : £${totalPrice}`;
+  ).innerHTML = `Total Price : £ ${totalPrice}`;
 };
 
 listCartHTML.addEventListener("click", (event) => {
