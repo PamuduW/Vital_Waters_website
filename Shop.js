@@ -131,7 +131,7 @@ const addCartToHTML = () => {
       }" width="181px" height="200px">
         </div>
         <div class="name">
-          ${info.name} - Color: ${info.color[cart.colorChoice]}
+          ${info.name} <br> Color : ${info.color[cart.colorChoice]}
         </div>
         <div class="totalPrice">
           £ ${info.price * cart.quantity}
