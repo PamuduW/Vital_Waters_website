@@ -1,0 +1,51 @@
+body {
+    font-family: sans-serif;
+}
+
+#progress-container {
+    width: 50%;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#progress-bar {
+    height: 10px;
+    background-color: #4CAF50;
+    transition: width 0.5s ease-in-out;
+}
+
+#progress-text {
+    padding: 5px;
+}
+
+#question-container {
+    margin-top: 20px;
+}
+
+#questions {
+    list-style: none;
+    padding: 0;
+}
+
+#buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#next-step {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#skip-step {
+    background-color: #ccc;
+    color: black;
+}
