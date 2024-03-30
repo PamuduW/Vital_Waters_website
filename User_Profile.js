@@ -1,88 +1,288 @@
-const questionsData = [
-    // Array containing question objects for each step. Each object should have a "question" property and an "answer" property (optional)
-    [
-      { question: "What is your name?" },
-      { question: "What is your favorite color?" },
-      { question: "What is your preferred pet?" },
-      { question: "What country do you live in?" },
-      { question: "What is your favorite hobby?" },
-    ],
-    [
-      { question: "What is your favorite food?" },
-      { question: "What kind of music do you enjoy?" },
-      { question: "Do you prefer reading or watching movies?" },
-      { question: "What is your dream vacation destination?" },
-      { question: "What is one skill you'd like to learn?" },
-    ],
-    [
-      { question: "What is your favorite book?" },
-      { question: "What is your biggest fear?" },
-      { question: "What is your proudest accomplishment?" },
-      { question: "If you could have any superpower, what would it be?" },
-      { question: "What advice would you give your younger self?" },
-    ],
-    [
-      { question: "What is the most important thing in life to you?" },
-      { question: "What are you passionate about?" },
-      { question: "What is your biggest dream?" },
-      { question: "How would you like to be remembered?" },
-      { question: "Thank you for participating!" },
-    ],
-  ];
-  
-  let currentStep = 0;
-  let answeredQuestions = {};
-  
-  function updateProgress() {
-    const progress = (currentStep / questionsData.length) * 100;
-    document.getElementById("progress-bar").style.width = `${progress}%`;
-    document.getElementById("progress-text").textContent = `Step ${currentStep + 1} (${progress.toFixed(1)}%)`;
-}
+let progress = 0;
+let Answer;
+let profile_completed_percentage;
+let Total_questions = 16;
 
-function displayQuestions() {
-  const questionContainer = document.getElementById("questions");
-  questionContainer.innerHTML = ""; // Clear previous questions
+let Question_number = 0;
+let Questions_in_section = 4;
+let Section_number = 1;
+const section_1 = document.getElementsByClassName("Section_1");
 
-  const currentQuestions = questionsData[currentStep];
-  for (let i = 0; i < currentQuestions.length; i++) {
-    const question = currentQuestions[i];
-    const questionElement = document.createElement("li");
-    questionElement.textContent = question.question;
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter your first name: "
+);
+section_1[0].innerHTML = "Name : " + Answer;
 
-    // Check if answer was previously provided for this question
-    const answer = answeredQuestions[`${currentStep}-${i}`];
-    if (answer) {
-      const answerElement = document.createElement("span");
-      answerElement.textContent = ` (Answered: ${answer})`;
-      questionElement.appendChild(answerElement);
-    }
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter your surname name: "
+);
+section_1[1].innerHTML = "Surname : " + Answer;
 
-    questionContainer.appendChild(questionElement);
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter your age: "
+);
+section_1[2].innerHTML = "Age : " + Answer;
+
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter the relevent letter of your gender (Male = M or Female = F): "
+);
+section_1[3].innerHTML = "Gender : " + Answer;
+
+profile_completed_percentage = (progress / Total_questions) * 100;
+document.getElementById("profile_completed_percentage_section_1").innerHTML =
+  "Profile completed " + profile_completed_percentage + "%";
+
+Question_number = 0;
+Questions_in_section = 4;
+Section_number = 2;
+const section_2 = document.getElementsByClassName("Section_2");
+
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter your first name: "
+);
+section_2[0].innerHTML = "Name : " + Answer;
+
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter your surname name: "
+);
+section_2[1].innerHTML = "Surname : " + Answer;
+
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter your age: "
+);
+section_2[2].innerHTML = "Age : " + Answer;
+
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter the relevent letter of your gender (Male = M or Female = F): "
+);
+section_2[3].innerHTML = "Gender : " + Answer;
+
+profile_completed_percentage = (progress / Total_questions) * 100;
+document.getElementById("profile_completed_percentage_section_2").innerHTML =
+  "Profile completed " + profile_completed_percentage + "%";
+
+Question_number = 0;
+Questions_in_section = 4;
+Section_number = 3;
+const section_3 = document.getElementsByClassName("Section_3");
+
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter your first name: "
+);
+section_3[0].innerHTML = "Name : " + Answer;
+
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter your surname name: "
+);
+section_3[1].innerHTML = "Surname : " + Answer;
+
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter your age: "
+);
+section_3[2].innerHTML = "Age : " + Answer;
+
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter the relevent letter of your gender (Male = M or Female = F): "
+);
+section_3[3].innerHTML = "Gender : " + Answer;
+
+profile_completed_percentage = (progress / Total_questions) * 100;
+document.getElementById("profile_completed_percentage_section_3").innerHTML =
+  "Profile completed " + profile_completed_percentage + "%";
+
+Question_number = 0;
+Questions_in_section = 4;
+Section_number = 4;
+const section_4 = document.getElementsByClassName("Section_4");
+
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter your first name: "
+);
+section_4[0].innerHTML = "Name : " + Answer;
+
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter your surname name: "
+);
+section_4[1].innerHTML = "Surname : " + Answer;
+
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter your age: "
+);
+section_4[2].innerHTML = "Age : " + Answer;
+
+Question_number += 1;
+progress += 1;
+Answer = prompt(
+  "Section " +
+    Section_number +
+    ": Personal details | Question  " +
+    Question_number +
+    "/" +
+    Questions_in_section +
+    "\n" +
+    "Please enter the relevent letter of your gender (Male = M or Female = F): "
+);
+section_4[3].innerHTML = "Gender : " + Answer;
+
+profile_completed_percentage = (progress / Total_questions) * 100;
+document.getElementById("profile_completed_percentage_section_4").innerHTML =
+  "Profile completed " + profile_completed_percentage + "%";
+
+const previous_button = document.getElementById("previous_button");
+const next_button = document.getElementById("next_button");
+
+function Previous_prompt() {
+  if (progress > 0) {
+    progress--;
+    update_UI();
   }
 }
 
-function handleNextStep() {
-  if (currentStep < questionsData.length - 1) {
-    currentStep++;
-    updateProgress();
-    displayQuestions();
-  } else {
-    // Handle completing the quiz (e.g., display completion message)
-    alert("Congratulations! You have completed the quiz.");
+function Next_prompt() {
+  if (progress < Total_questions) {
+    progress++;
+    update_UI();
   }
 }
 
-function handleSkipStep() {
-  if (currentStep < questionsData.length - 1) {
-    currentStep++;
-    updateProgress();
-    displayQuestions();
+function update_UI() {}
+
+function Show_prompt() {
+  if (progress < Total_questions) {
   }
 }
-
-document.getElementById("next-step").addEventListener("click", handleNextStep);
-document.getElementById("skip-step").addEventListener("click", handleSkipStep);
-
-displayQuestions();
-updateProgress();
-  
