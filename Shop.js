@@ -83,25 +83,23 @@ listProductHTML.addEventListener("click", (event) => {
 });
 
 const addToCart = (product_id, colorChoice) => {
-  let positionThisProductInCart = carts.findIndex(
-    (value) => value.product_id == product_id
-  );
+  let productInCart = carts.find((value) => value.product_id == product_id && value.colorChoice == colorChoice);
   if (carts.length <= 0) {
     carts = [
       {
         product_id: product_id,
         quantity: 1,
         colorChoice: colorChoice,
-      },
+      }
     ];
-  } else if (positionThisProductInCart < 0) {
+  } else if (!productInCart) {
     carts.push({
       product_id: product_id,
       quantity: 1,
       colorChoice: colorChoice,
     });
   } else {
-    carts[positionThisProductInCart].quantity += 1;
+    productInCart.quantity += 1;
   }
   addCartToHTML();
 };
@@ -126,10 +124,10 @@ const addCartToHTML = () => {
           <img src="${selectedImage}" alt="${info.alt}" width="181px" height="200px">
         </div>
         <div class="name">
-          ${info.name}
+          ${info.name} - Color: ${info.color[cart.colorChoice]}
         </div>
         <div class="totalPrice">
-          &#163;${info.price * cart.quantity}
+          £${info.price * cart.quantity}
         </div>
         <div class="quantity">
           <span class="minus"><</span>
@@ -142,7 +140,7 @@ const addCartToHTML = () => {
   iconCartSpan.innerText = totalQuantity;
   document.querySelector(
     ".totalPriceFull"
-  ).innerHTML = `Total Price : &#163;&nbsp;${totalPrice}`;
+  ).innerHTML = `Total Price : £${totalPrice}`;
 };
 
 listCartHTML.addEventListener("click", (event) => {
