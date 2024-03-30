@@ -138,11 +138,12 @@ body.showCart .container {
 
 .cartTab .btn button {
     background-color: #e8bc0e;
-    margin: 3px;
+    margin: 5px;
     border-radius: 20px;
     font-family: Poppins;
     font-weight: 500;
     cursor: pointer;
+    height: 40px;
 }
 
 .cartTab .btn .close {
