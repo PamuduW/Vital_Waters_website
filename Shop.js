@@ -118,27 +118,33 @@ const addCartToHTML = () => {
       );
       let info = listProducts[positionProduct];
       totalPrice += info.price * cart.quantity;
+      let selectedImage = info.image[0];
+      if (cart.colorChoice !== undefined) {
+        selectedImage = info.image[cart.colorChoice];
+      }
       newCart.innerHTML = `<div class="image">
-          <img src="${
-            info.image
-          }" alt="${info.alt}" width="181px" height="200px"> 
+          <img src="${selectedImage}" alt="${
+        info.alt
+      }" width="181px" height="200px">
         </div>
         <div class="name">
-          ${info.name} 
-        </div> 
+          ${info.name}
+        </div>
         <div class="totalPrice">
           &#163;${info.price * cart.quantity}
-        </div> 
-        <div class="quantity"> 
-          <span class="minus"><</span> 
-          <span>${cart.quantity}</span> 
-          <span class="plus">></span> 
+        </div>
+        <div class="quantity">
+          <span class="minus"><</span>
+          <span>${cart.quantity}</span>
+          <span class="plus">></span>
         </div>`;
       listCartHTML.appendChild(newCart);
     });
   }
   iconCartSpan.innerText = totalQuantity;
-  document.querySelector(".totalPriceFull").innerHTML = `Total Price : &#163;&nbsp;${totalPrice}`;
+  document.querySelector(
+    ".totalPriceFull"
+  ).innerHTML = `Total Price : &#163;&nbsp;${totalPrice}`;
 };
 
 listCartHTML.addEventListener("click", (event) => {
@@ -156,23 +162,28 @@ listCartHTML.addEventListener("click", (event) => {
   }
 });
 
-const changeQuantity = (product_id, type) => {
+const changeQuantity = (product_id, type, colorChoice) => {
   let positionItemInCart = carts.findIndex(
     (value) => value.product_id == product_id
   );
   if (positionItemInCart >= 0) {
+    let product = carts[positionItemInCart];
     switch (type) {
       case "plus":
-        carts[positionItemInCart].quantity += 1;
+        product.quantity += 1;
         break;
-      default:
-        let valueChange = carts[positionItemInCart].quantity - 1;
+      case "minus":
+        let valueChange = product.quantity - 1;
         if (valueChange > 0) {
-          carts[positionItemInCart].quantity = valueChange;
+          product.quantity = valueChange;
         } else {
           carts.splice(positionItemInCart, 1);
         }
         break;
+    }
+
+    if (colorChoice !== undefined) {
+      product.colorChoice = colorChoice;
     }
   }
   addCartToHTML();
@@ -181,8 +192,8 @@ const changeQuantity = (product_id, type) => {
 function checkOut() {
   if (carts.length > 0) {
     window.location.href = "Checkout.html";
-  }else{
-    alert("Plese select an item first")
+  } else {
+    alert("Plese select an item first");
   }
 }
 
