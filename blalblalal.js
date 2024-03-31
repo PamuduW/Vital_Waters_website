@@ -59,11 +59,8 @@ function gettingData() {
     alert("Please go to the next stage");
     return;
   }
-  if (j == 0) {
-    setholder[i][0].innerHTML = `<br>${questiontype[i]}`;
-  }
   answers[i][j] = prompt(questions[i][j]);
-  dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
+  holder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
   j += 1;
 }
 
