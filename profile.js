@@ -47,6 +47,8 @@ const set2 = document.getElementsByClassName("set2");
 const set3 = document.getElementsByClassName("set3");
 const set4 = document.getElementsByClassName("set4");
 
+const progress = document.getElementsByClassName("progress");
+
 let dataholder = [data1, data2, data3, data4];
 let setholder = [set1, set2, set3, set4];
 
@@ -61,8 +63,16 @@ function gettingData() {
   }
   if (j == 0) {
     setholder[i][0].innerHTML = `<br>${questiontype[i]}`;
+    let bar = ((i + 1) / questions.length) * 100;
+    progress[0].innerHTML = `<div class="progress-bar" style="width: ${
+      bar - 20
+    }%;">${bar}%</div>`;
   }
-  answers[i][j] = prompt(questions[i][j]);
+  let temp = prompt(questions[i][j]);
+  if (temp == "") {
+    temp = "Unanswered";
+  }
+  answers[i][j] = temp;
   dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
   j += 1;
 }
@@ -81,14 +91,37 @@ function goingToNextStage() {
   }
 }
 
+function goingTopreviousStage() {
+  if (i > 0) {
+    (i -= 1), (j = 0);
+    alert(i);
+    return;
+  } else {
+    alert("Cannot Go Back Further!!!");
+    return;
+  }
+}
+
 function skippingToNextStage() {
   if (i < questions.length) {
+    if (j == questions[i].length) {
+      alert("Please go to the next stage");
+      return;
+    }
     for (j = 0; j < questions[i].length; j++) {
       answers[i][j] = "Skipped";
       if (j == 0) {
         setholder[i][0].innerHTML = `<br>${questiontype[i]}`;
+        let bar = ((i + 1) / questions.length) * 100;
+        progress[0].innerHTML = `<div class="progress-bar" style="width: ${
+          bar - 20
+        }%;">${bar}%</div>`;
       }
       dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
+    }
+    if (i + 1 == questions.length) {
+      alert("Done !!! Thank you.");
+      return;
     }
     (i += 1), (j = 0);
     alert(i);

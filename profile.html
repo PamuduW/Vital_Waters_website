@@ -5,10 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>User Profile</title>
-    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="user_Profile.css">
 </head>
 
 <body>
+    <div class="buttons">
+        <button id="next-question" onclick="gettingData()">Next Question</button>
+        <button id="next-stage" onclick="goingToNextStage()">Next Stage</button>
+        <button id="previous-stage" onclick="goingTopreviousStage()">Previous stage</button>
+        <button id="skip-stage" onclick="skippingToNextStage()">Skip Stage</button>
+    </div>
+
+    <div class="progress"></div>
 
     <div id="info">
         <div>
@@ -45,15 +53,10 @@
         </div>
     </div>
 
-    <div class="progress"></div>
-
-    <div class="buttons">
-        <button id="next" onclick="gettingData()">Next</button>
-        <button id="next-stage" onclick="goingToNextStage()">Next Stage</button>
-        <button id="skip" onclick="skippingToNextStage()">Skip</button>
-    </div>
-
-    <script src="profile.js"></script>
+    <script src="user_Profile.js"></script>
 </body>
 
 </html>
+
+
+
