@@ -81,10 +81,20 @@ function goingToNextStage() {
   }
 }
 
-// function goingToNextStage() {
-//   (i += 1), (j = 0);
-//   if (i == questions.length) {
-//     alert("Done !!! Thank you.");
-//     return;
-//   }
-// }
+function skippingToNextStage() {
+  if (i < questions.length) {
+    for (j = 0; j < questions[i].length; j++) {
+      answers[i][j] = "Skipped";
+      if (j == 0) {
+        setholder[i][0].innerHTML = `<br>${questiontype[i]}`;
+      }
+      dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
+    }
+    (i += 1), (j = 0);
+    alert(i);
+    return;
+  } else {
+    alert("Done !!! Thank you.");
+    return;
+  }
+}
