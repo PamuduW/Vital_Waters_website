@@ -1,0 +1,77 @@
+<!-- Save as shop.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="checkout.css">
+</head>
+
+<body class="" onload="totalPricetext()">
+    <form class="CheckoutForm" action="javascript:finishing()">
+        <fieldset class="heading">
+            <p><b>Almost there...</b><br>Fill in the detail below to complete your purchase</p>
+        </fieldset>
+
+        <fieldset class="bill">
+            <legend><b>Billing Information</b></legend>
+            <span id="total-price"></span><br>
+            <span>
+                <span id="cart-Details"></span>
+            </span>
+        </fieldset>
+
+        <fieldset class="personal">
+            <legend><b>Personal Details</b></legend>
+            <label for="fname">First Name : <span class="required">*</span></label>
+            <input type="text" name="fname" id="fname" placeholder="  Enter your first name" required><br>
+            <label for="sname">Surname : <span class="required">*</span></label>
+            <input type="text" name="sname" id="sname" placeholder="  Enter your surname" required><br>
+            <label for="pnumber">Phone Number : <span class="required">*</span></label>
+            <input type="tel" name="pnumber" id="pnumber" placeholder="  Enter your phone number" required><br>
+            <label for="emial">Email Address : <span class="required">*</span></label>
+            <input type="email" name="email" id="email" placeholder="  Enter your email address" required><br>
+        </fieldset>
+
+        <fieldset class="payment">
+            <legend><b>Payment Details</b></legend>
+            <label for="cardNumber">Card Number : <span class="required">*</span></label>
+            <input type="text" name="cardNumber" id="cardNumber" required><br>
+            <label for="cardHolder">Cardholder Name : <span class="required">*</span></label>
+            <input type="text" name="cardHolder" id="cardHolder" required><br>
+            <label for="expDate">Expiry Date : <span class="required">*</span></label>
+            <input type="month" name="expDate" id="expDate" required><br>
+            <label for="ccv">CCV : <span class="required">*</span></label>
+            <input type="text" name="ccv" id="ccv" required><br>
+        </fieldset>
+
+        <fieldset class="address">
+            <legend><b>Billing Address</b></legend>
+            <label for="addressline1">Address Line 1 : <span class="required">*</span></label>
+            <input type="text" name="addressline1" id="addressline1" required><br>
+            <label for="addressline2">Address Line 2 : </label>
+            <input type="text" name="addressline2" id="addressline2"><br>
+            <label for="addressline3">Address Line 3 : </label>
+            <input type="text" name="addressline3" id="addressline3"><br>
+            <label for="town">Town/City : <span class="required">*</span></label>
+            <input type="text" name="town" id="town" required><br>
+            <label for="state">State/Country : </label>
+            <input type="text" name="state" id="state"><br>
+            <label for="zip">Postcode/Zipcode : <span class="required">*</span></label>
+            <input type="text" name="zip" id="zip" required><br>
+            <label for="country">Country : <span class="required">*</span></label>
+            <input type="text" name="country" id="country" required><br>
+        </fieldset>
+
+        <fieldset class="buttons">
+            <input type="reset" name="reset" id="reset" value="Reset" class="btn">
+            <input type="submit" name="Purchase" id="Purchase" value="Purchase" class="btn">
+        </fieldset>
+    </form>
+
+    <script src="checkout.js"></script>
+</body>
+
+</html>
