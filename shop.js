@@ -59,6 +59,7 @@ const addDataToHTML = () => {
           Add to Cart
         </button>
         `;
+
       const colorChoices = newProduct.querySelectorAll(".colorchoise input");
       colorChoices.forEach((choice) => {
         choice.addEventListener("change", (event) => {
@@ -125,7 +126,8 @@ const addCartToHTML = () => {
       let info = listProducts[positionProduct];
       totalPrice += info.price * cart.quantity;
       let selectedImage = info.image[cart.colorChoice];
-      newCart.innerHTML = `<div class="image">
+      newCart.innerHTML = `
+        <div class="image">
           <img src="${selectedImage}" alt="${
         info.alt
       }" width="181px" height="200px">
@@ -197,10 +199,10 @@ function checkOut() {
     // Prepare an array of objects with item details
     let cartDetails = carts.map((item) => {
       let product = listProducts.find((p) => p.id == item.product_id);
-      if (item.colorChoice==0){
-        color="Black"
-      }else{
-        color="White"
+      if (item.colorChoice == 0) {
+        color = "Black";
+      } else {
+        color = "White";
       }
       return {
         start: "...",
