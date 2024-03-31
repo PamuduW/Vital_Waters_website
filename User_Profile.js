@@ -47,6 +47,8 @@ const set2 = document.getElementsByClassName("set2");
 const set3 = document.getElementsByClassName("set3");
 const set4 = document.getElementsByClassName("set4");
 
+const progress = document.getElementsByClassName("progress");
+
 let dataholder = [data1, data2, data3, data4];
 let setholder = [set1, set2, set3, set4];
 
@@ -61,6 +63,10 @@ function gettingData() {
   }
   if (j == 0) {
     setholder[i][0].innerHTML = `<br>${questiontype[i]}`;
+    let bar = ((i + 1) / questions.length) * 100;
+    progress[0].innerHTML = `<div class="progress-bar" style="width: ${
+      bar - 20
+    }%;">${bar}%</div>`;
   }
   let temp = prompt(questions[i][j]);
   if (temp == "") {
@@ -106,6 +112,10 @@ function skippingToNextStage() {
       answers[i][j] = "Skipped";
       if (j == 0) {
         setholder[i][0].innerHTML = `<br>${questiontype[i]}`;
+        let bar = ((i + 1) / questions.length) * 100;
+        progress[0].innerHTML = `<div class="progress-bar" style="width: ${
+          bar - 20
+        }%;">${bar}%</div>`;
       }
       dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
     }
@@ -121,6 +131,3 @@ function skippingToNextStage() {
     return;
   }
 }
-
-
-
