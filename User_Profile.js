@@ -62,7 +62,11 @@ function gettingData() {
   if (j == 0) {
     setholder[i][0].innerHTML = `<br>${questiontype[i]}`;
   }
-  answers[i][j] = prompt(questions[i][j]);
+  let temp = prompt(questions[i][j]);
+  if (temp == "") {
+    temp = "Unanswered";
+  }
+  answers[i][j] = temp;
   dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
   j += 1;
 }
@@ -83,12 +87,20 @@ function goingToNextStage() {
 
 function skippingToNextStage() {
   if (i < questions.length) {
+    if (j == questions[i].length) {
+      alert("Please go to the next stage");
+      return;
+    }
     for (j = 0; j < questions[i].length; j++) {
       answers[i][j] = "Skipped";
       if (j == 0) {
         setholder[i][0].innerHTML = `<br>${questiontype[i]}`;
       }
       dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
+    }
+    if (i + 1 == questions.length) {
+      alert("Done !!! Thank you.");
+      return;
     }
     (i += 1), (j = 0);
     alert(i);

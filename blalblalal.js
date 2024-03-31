@@ -59,8 +59,15 @@ function gettingData() {
     alert("Please go to the next stage");
     return;
   }
-  answers[i][j] = prompt(questions[i][j]);
-  holder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
+  if (j == 0) {
+    setholder[i][0].innerHTML = `<br>${questiontype[i]}`;
+  }
+  let temp = prompt(questions[i][j]);
+  if (temp == "") {
+    temp = "Unanswerd";
+  }
+  answers[i][j] = temp;
+  dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
   j += 1;
 }
 
@@ -73,15 +80,26 @@ function goingToNextStage() {
     alert(i);
     return;
   } else {
+    (i += 1), (j = 0);
     alert("Done !!! Thank you.");
     return;
   }
 }
 
-// function goingToNextStage() {
-//   (i += 1), (j = 0);
-//   if (i == questions.length) {
-//     alert("Done !!! Thank you.");
-//     return;
-//   }
-// }
+function skippingToNextStage() {
+  if (i < questions.length) {
+    for (j = 0; j < questions[i].length; j++) {
+      answers[i][j] = "Skipped";
+      if (j == 0) {
+        setholder[i][0].innerHTML = `<br>${questiontype[i]}`;
+      }
+      dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
+    }
+    (i += 1), (j = 0);
+    alert(i);
+    return;
+  } else {
+    alert("Done !!! Thank you.");
+    return;
+  }
+}
