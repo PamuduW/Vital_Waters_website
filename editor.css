@@ -58,6 +58,7 @@ td {
 
 .tasks {
     margin: 40px;
+    margin-left: 55px;
     padding: 30px;
     background-color: bisque;
     border-radius: 20px;
@@ -73,7 +74,7 @@ td {
 }
 
 .tasks1 {
-    margin-left: 365px;
+    margin-left: 373px;
     margin-top: 40px;
     padding: 30px;
     background-color: bisque;
