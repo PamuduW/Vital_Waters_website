@@ -85,6 +85,17 @@ function goingToNextStage() {
   }
 }
 
+function goingTopreviousStage() {
+  if (i > 0) {
+    (i -= 1), (j = 0);
+    alert(i);
+    return;
+  } else {
+    alert("Cannot Go Back Further!!!");
+    return;
+  }
+}
+
 function skippingToNextStage() {
   if (i < questions.length) {
     if (j == questions[i].length) {
