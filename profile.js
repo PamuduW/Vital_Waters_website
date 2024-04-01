@@ -85,7 +85,6 @@ function gettingTheAnswer() {
     document.querySelector(".current_stage_name").innerHTML = `${
       questionType[i + 1]
     }`;
-
     let profile_progressbar = ((i + 1) / questions.length) * 100;
     document.querySelector(
       ".profile_progress"
@@ -97,15 +96,14 @@ function gettingTheAnswer() {
   dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
   document.querySelector(`.set${i + 1}`).style.display = "block";
   j += 1;
-
-  let current_stage_progressbar = (j / questions[i].length) * 100;
-  document.querySelector(
-    ".current_stage_progress"
-  ).innerHTML = `<div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
   document.querySelector("input").value = "";
   if (j == questions[i].length) {
     (i += 1), (j = 0);
   }
+  let current_stage_progressbar = (j / questions[i].length) * 100;
+  document.querySelector(
+    ".current_stage_progress"
+  ).innerHTML = `<div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
   if (i == questionType.length && j == 0) {
     alert("All done!!!");
     document.querySelector(".current_stage_name").innerHTML = `Thank you...`;
@@ -115,89 +113,52 @@ function gettingTheAnswer() {
   document.querySelector(".current_question").innerHTML = `${questions[i][j]}`;
 }
 
+function goingToPreviousQuestion() {
+  if (i == 0 && j == 0) {
+    alert("You are in first Question, can't go back!");
+    return;
+  } else if (j == 0) {
+    (i -= 1), (j = questions[i].length - 1);
+    let profile_progressbar = (i / questions.length) * 100;
+    document.querySelector(
+      ".profile_progress"
+    ).innerHTML = `<div class="progress-bar" style="width: ${profile_progressbar}%;">${profile_progressbar}%</div>`;
+  } else {
+    j -= 1;
+  }
+  document.querySelector(
+    ".current_stage_name"
+  ).innerHTML = `${questionType[i]}`;
+  document.querySelector(".current_question").innerHTML = `${questions[i][j]}`;
+  let current_stage_progressbar = (j / questions[i].length) * 100;
+  document.querySelector(
+    ".current_stage_progress"
+  ).innerHTML = `<div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function goingToPreviousQuestion() {}
-
-// function goingToNextStage() {
-//   if (j < questions[i].length) {
-//     alert("Please go through the steps...");
-//     return;
-//   } else if (i + 1 < questions.length) {
-//     (i += 1), (j = 0);
-//     alert(i);
-//     return;
-//   } else {
-//     alert("Done !!! Thank you.");
-//     return;
-//   }
-// }
-
-// function goingTopreviousStage() {
-//   if (i > 0) {
-//     (i -= 1), (j = 0);
-//     alert(i);
-//     return;
-//   } else {
-//     alert("Cannot Go Back Further!!!");
-//     return;
-//   }
-// }
-
-// function skippingToNextStage() {
-//   if (i < questions.length) {
-//     if (j == questions[i].length) {
-//       alert("Please go to the next stage");
-//       return;
-//     }
-//     for (j = 0; j < questions[i].length; j++) {
-//       answers[i][j] = "Skipped";
-//       if (j == 0) {
-//         setholder[i][0].innerHTML = `<br>${questiontype[i]}`;
-//         let bar = ((i + 1) / questions.length) * 100;
-//         progress[0].innerHTML = `<div class="progress-bar" style="width: ${
-//           bar - 20
-//         }%;">${bar}%</div>`;
-//       }
-//       dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
-//     }
-//     if (i + 1 == questions.length) {
-//       alert("Done !!! Thank you.");
-//       return;
-//     }
-//     (i += 1), (j = 0);
-//     alert(i);
-//     return;
-//   } else {
-//     alert("Done !!! Thank you.");
-//     return;
-//   }
-// }
+function skippingToNextQuestion() {
+  if (i == questionType.length && j == 0) {
+    alert("All done!!! Thank you...");
+    return;
+  }
+  document.querySelector(
+    ".current_stage_name"
+  ).innerHTML = `${questionType[i]}`;
+  answers[i][j] = "Skipped";
+  dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
+  document.querySelector(`.set${i + 1}`).style.display = "block";
+  if (j + 1 == questions[i].length) {
+    (i += 1), (j = 0);
+    let profile_progressbar = (i / questions.length) * 100;
+    document.querySelector(
+      ".profile_progress"
+    ).innerHTML = `<div class="progress-bar" style="width: ${profile_progressbar}%;">${profile_progressbar}%</div>`;
+  } else {
+    j += 1;
+  }
+  document.querySelector(".current_question").innerHTML = `${questions[i][j]}`;
+  let current_stage_progressbar = (j / questions[i].length) * 100;
+  document.querySelector(
+    ".current_stage_progress"
+  ).innerHTML = `<div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
+}
