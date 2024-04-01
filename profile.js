@@ -30,11 +30,36 @@ let answers = [
   //   ["", "", "", "", ""],
 ];
 
-let questiontype = [
+let questionType = [
   "<b>Personal Details</b>",
   "<b>Volunteering Tasks</b>",
   //   "<b>Qualifiations</b>",
   //   "<b>Avaiability and contact</b>",
+];
+
+let questionPlaceHolder = [
+  [
+    "Name : ",
+    "Surname : ",
+    "Age : ",
+    "Gender (M/F) : ",
+    "Agree with privacy terms (Yes/No) : ",
+  ],
+  ["Rational : ", "DoA : ", "Task : ", "Place : ", "Assignment type : "],
+  //   [
+  //     "Area of study : ",
+  //     "Highest degree : ",
+  //     "University/Institution : ",
+  //     "Completion year : ",
+  //     "Country : ",
+  //   ],
+  //   [
+  //     "Availability for volunteering : ",
+  //     "Surname : ",
+  //     "Tel. No. : ",
+  //     "Email : ",
+  //     "Game on : ",
+  //   ],
 ];
 
 const data1 = document.getElementsByClassName("data1");
@@ -42,92 +67,98 @@ const data2 = document.getElementsByClassName("data2");
 const data3 = document.getElementsByClassName("data3");
 const data4 = document.getElementsByClassName("data4");
 
-const set1 = document.getElementsByClassName("set1");
-const set2 = document.getElementsByClassName("set2");
-const set3 = document.getElementsByClassName("set3");
-const set4 = document.getElementsByClassName("set4");
-
-const progress = document.getElementsByClassName("progress");
-
 let dataholder = [data1, data2, data3, data4];
-let setholder = [set1, set2, set3, set4];
-
 let i = 0,
-  j = 0,
-  k = 0;
+  j = 0;
 
-function gettingData() {
-  if (j == questions[i].length) {
-    alert("Please go to the next stage");
+document.querySelector(".current_stage_name").innerHTML = `${questionType[i]}`;
+document.querySelector(".current_question").innerHTML = `${questions[i][j]}`;
+
+function gettingTheAnswer() {
+  if (i == questionType.length && j == 0) {
+    alert("All done!!! Thank you...");
     return;
+  } else if (document.querySelector("input").value == "") {
+    alert("Please fill the blank");
+    return;
+  } else if (j + 1 == questions[i].length) {
+    document.querySelector(".current_stage_name").innerHTML = `${
+      questionType[i + 1]
+    }`;
+    let profile_progressbar = ((i + 1) / questions.length) * 100;
+    document.querySelector(
+      ".profile_progress"
+    ).innerHTML = `<div class="progress-bar" style="width: ${profile_progressbar}%;">${profile_progressbar}%</div>`;
   }
-  if (j == 0) {
-    setholder[i][0].innerHTML = `<br>${questiontype[i]}`;
-    let bar = ((i + 1) / questions.length) * 100;
-    progress[0].innerHTML = `<div class="progress-bar" style="width: ${
-      bar - 20
-    }%;">${bar}%</div>`;
-  }
-  let temp = prompt(questions[i][j]);
-  if (temp == "") {
-    temp = "Unanswered";
-  }
+  let temp = document.querySelector("input").value;
+  console.log(temp);
   answers[i][j] = temp;
   dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
+  document.querySelector(`.set${i + 1}`).style.display = "block";
   j += 1;
-}
-
-function goingToNextStage() {
-  if (j < questions[i].length) {
-    alert("Please go through the steps...");
-    return;
-  } else if (i + 1 < questions.length) {
+  document.querySelector("input").value = "";
+  if (j == questions[i].length) {
     (i += 1), (j = 0);
-    alert(i);
-    return;
-  } else {
-    alert("Done !!! Thank you.");
+  }
+  let current_stage_progressbar = (j / questions[i].length) * 100;
+  document.querySelector(
+    ".current_stage_progress"
+  ).innerHTML = `<div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
+  if (i == questionType.length && j == 0) {
+    alert("All done!!!");
+    document.querySelector(".current_stage_name").innerHTML = `Thank you...`;
+    document.querySelector(".current_question").innerHTML = ``;
     return;
   }
+  document.querySelector(".current_question").innerHTML = `${questions[i][j]}`;
 }
 
-function goingTopreviousStage() {
-  if (i > 0) {
-    (i -= 1), (j = 0);
-    alert(i);
+function goingToPreviousQuestion() {
+  if (i == 0 && j == 0) {
+    alert("You are in first Question, can't go back!");
     return;
+  } else if (j == 0) {
+    (i -= 1), (j = questions[i].length - 1);
+    let profile_progressbar = (i / questions.length) * 100;
+    document.querySelector(
+      ".profile_progress"
+    ).innerHTML = `<div class="progress-bar" style="width: ${profile_progressbar}%;">${profile_progressbar}%</div>`;
   } else {
-    alert("Cannot Go Back Further!!!");
+    j -= 1;
+  }
+  document.querySelector(
+    ".current_stage_name"
+  ).innerHTML = `${questionType[i]}`;
+  document.querySelector(".current_question").innerHTML = `${questions[i][j]}`;
+  let current_stage_progressbar = (j / questions[i].length) * 100;
+  document.querySelector(
+    ".current_stage_progress"
+  ).innerHTML = `<div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
+}
+
+function skippingToNextQuestion() {
+  if (i == questionType.length && j == 0) {
+    alert("All done!!! Thank you...");
     return;
   }
-}
-
-function skippingToNextStage() {
-  if (i < questions.length) {
-    if (j == questions[i].length) {
-      alert("Please go to the next stage");
-      return;
-    }
-    for (j = 0; j < questions[i].length; j++) {
-      answers[i][j] = "Skipped";
-      if (j == 0) {
-        setholder[i][0].innerHTML = `<br>${questiontype[i]}`;
-        let bar = ((i + 1) / questions.length) * 100;
-        progress[0].innerHTML = `<div class="progress-bar" style="width: ${
-          bar - 20
-        }%;">${bar}%</div>`;
-      }
-      dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
-    }
-    if (i + 1 == questions.length) {
-      alert("Done !!! Thank you.");
-      return;
-    }
+  document.querySelector(
+    ".current_stage_name"
+  ).innerHTML = `${questionType[i]}`;
+  answers[i][j] = "Skipped";
+  dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
+  document.querySelector(`.set${i + 1}`).style.display = "block";
+  if (j + 1 == questions[i].length) {
     (i += 1), (j = 0);
-    alert(i);
-    return;
+    let profile_progressbar = (i / questions.length) * 100;
+    document.querySelector(
+      ".profile_progress"
+    ).innerHTML = `<div class="progress-bar" style="width: ${profile_progressbar}%;">${profile_progressbar}%</div>`;
   } else {
-    alert("Done !!! Thank you.");
-    return;
+    j += 1;
   }
+  document.querySelector(".current_question").innerHTML = `${questions[i][j]}`;
+  let current_stage_progressbar = (j / questions[i].length) * 100;
+  document.querySelector(
+    ".current_stage_progress"
+  ).innerHTML = `<div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
 }
