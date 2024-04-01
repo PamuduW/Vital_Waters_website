@@ -9,54 +9,73 @@
 </head>
 
 <body>
-    <div class="buttons">
-        <button id="next-question" onclick="gettingData()">Next Question</button>
-        <button id="next-stage" onclick="goingToNextStage()">Next Stage</button>
-        <button id="previous-stage" onclick="goingTopreviousStage()">Previous stage</button>
-        <button id="skip-stage" onclick="skippingToNextStage()">Skip Stage</button>
+    <div class="box">
+        <div class="current_stage_name"></div>
+        <div class="current_question"></div>
+        <div class="current_answer">
+            <input type="text" placeholder="boom">
+        </div>
+        <div class="current_stage_progress"></div>
+
+        <div class="buttons">
+            <button id="previous-stage" onclick="goingToPreviousStage()">Previous Category</button>
+            <div class="middle-buttons">
+                <button id="next-question" onclick="gettingTheAnswer()">Next Question</button>
+                <button id="next-stage" onclick="goingToNextStage()">Next Stage</button>
+                <button id="previous-question" onclick="goingToPreviousStage()">Previous Question</button>
+            </div>
+            <button id="skip-stage" onclick="skippingToNextStage()">Skip Stage</button>
+        </div>
     </div>
 
-    <div class="progress"></div>
+    <div class="profile_progress"></div>
 
-    <div id="info">
+    <fieldset>
+        <legend class="set1">
+        </legend>
         <div>
-            <div class="set1"></div>
             <div class="data1"></div>
             <div class="data1"></div>
             <div class="data1"></div>
             <div class="data1"></div>
             <div class="data1"></div>
         </div>
+    </fieldset>
+
+    <fieldset>
+        <legend class="set2"></legend>
         <div>
-            <div class="set2"></div>
             <div class="data2"></div>
             <div class="data2"></div>
             <div class="data2"></div>
             <div class="data2"></div>
             <div class="data2"></div>
         </div>
+    </fieldset>
+
+    <fieldset>
+        <legend class="set3"></legend>
         <div>
-            <div class="set3"></div>
-            <div class="data2"></div>
-            <div class="data2"></div>
-            <div class="data2"></div>
-            <div class="data2"></div>
-            <div class="data2"></div>
+            <div class="data3"></div>
+            <div class="data3"></div>
+            <div class="data3"></div>
+            <div class="data3"></div>
+            <div class="data3"></div>
         </div>
+    </fieldset>
+
+    <fieldset>
+        <legend class="set4"></legend>
         <div>
-            <div class="set4"></div>
-            <div class="data2"></div>
-            <div class="data2"></div>
-            <div class="data2"></div>
-            <div class="data2"></div>
-            <div class="data2"></div>
+            <div class="data4"></div>
+            <div class="data4"></div>
+            <div class="data4"></div>
+            <div class="data4"></div>
+            <div class="data4"></div>
         </div>
-    </div>
+    </fieldset>
 
     <script src="profile.js"></script>
 </body>
 
 </html>
-
-
-
