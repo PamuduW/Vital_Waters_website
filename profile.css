@@ -4,6 +4,11 @@
     line-height: 30px;
     color: white;
     margin-left: 10%;
+    margin-right: 10%;
     border-radius: 20px;
     margin: 40px;
+  }
+
+  .set1, .set2, .set3, .set4 {
+    display: none;
   }

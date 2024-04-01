@@ -18,21 +18,19 @@
         <div class="current_stage_progress"></div>
 
         <div class="buttons">
-            <button id="previous-stage" onclick="goingToPreviousStage()">Previous Category</button>
-            <div class="middle-buttons">
-                <button id="next-question" onclick="gettingTheAnswer()">Next Question</button>
-                <button id="next-stage" onclick="goingToNextStage()">Next Stage</button>
-                <button id="previous-question" onclick="goingToPreviousStage()">Previous Question</button>
-            </div>
+            <button id="previous-stage" onclick="goingToPreviousStage()">Previous Stage</button>
+            <button id="next-stage" onclick="goingToNextStage()">Next Stage</button>
             <button id="skip-stage" onclick="skippingToNextStage()">Skip Stage</button>
+            <button id="next-question" onclick="gettingTheAnswer()">Next Question</button>
+            <button id="previous-question" onclick="goingToPreviousQuestion()">Previous Question</button>
+            <button id="previous-question" onclick="skippingToNextQuestion()">Skip Question</button>
         </div>
     </div>
 
     <div class="profile_progress"></div>
 
-    <fieldset>
-        <legend class="set1">
-        </legend>
+    <fieldset class="set1">
+        <legend><b>Personal Details</b></legend>
         <div>
             <div class="data1"></div>
             <div class="data1"></div>
@@ -42,8 +40,8 @@
         </div>
     </fieldset>
 
-    <fieldset>
-        <legend class="set2"></legend>
+    <fieldset class="set2">
+        <legend><b>Volunteering Tasks</b></legend>
         <div>
             <div class="data2"></div>
             <div class="data2"></div>
@@ -53,8 +51,8 @@
         </div>
     </fieldset>
 
-    <fieldset>
-        <legend class="set3"></legend>
+    <fieldset class="set3">
+        <legend><b>Qualifiations</b></legend>
         <div>
             <div class="data3"></div>
             <div class="data3"></div>
@@ -64,8 +62,8 @@
         </div>
     </fieldset>
 
-    <fieldset>
-        <legend class="set4"></legend>
+    <fieldset class="set4">
+        <legend><b>Avaiability and contact</b></legend>
         <div>
             <div class="data4"></div>
             <div class="data4"></div>
