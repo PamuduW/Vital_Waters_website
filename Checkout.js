@@ -26,6 +26,6 @@ function finishing() {
     document.body.appendChild(message);
   }, 800);
   setTimeout(function () {
-    window.location.href = "Shop.html";
+    window.location.href = "shop.html";
   }, 2500);
 }

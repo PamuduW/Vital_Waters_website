@@ -1,9 +1,9 @@
-let iconCart = document.querySelector(".icon-cart");
+let iconCart = document.querySelector(".cart-icon");
 let closeCart = document.querySelector(".close");
 let body = document.querySelector("body");
-let listProductHTML = document.querySelector(".listProduct");
-let listCartHTML = document.querySelector(".listCart");
-let iconCartSpan = document.querySelector(".icon-cart span");
+let listProductHTML = document.querySelector(".listOfProduct");
+let listCartHTML = document.querySelector(".listOfCartItems");
+let iconCartSpan = document.querySelector(".cart-icon span");
 
 let carts = [];
 let listProducts = [
@@ -146,7 +146,7 @@ const addCartToHTML = () => {
   }
   iconCartSpan.innerText = totalQuantity;
   document.querySelector(
-    ".totalPriceFull"
+    ".totalPrice"
   ).innerHTML = `Total Price : £ ${totalPrice}`;
 };
 
@@ -197,10 +197,10 @@ function checkOut() {
     // Prepare an array of objects with item details
     let cartDetails = carts.map((item) => {
       let product = listProducts.find((p) => p.id == item.product_id);
-      if (item.colorChoice==0){
-        color="Black"
-      }else{
-        color="White"
+      if (item.colorChoice == 0) {
+        color = "Black";
+      } else {
+        color = "White";
       }
       return {
         start: "...",
@@ -214,9 +214,9 @@ function checkOut() {
     // Convert the array to a JSON string and URL-encode it
     let encodedCartDetails = encodeURIComponent(JSON.stringify(cartDetails));
     let totalPrice = document
-      .querySelector(".totalPriceFull")
+      .querySelector(".totalPrice")
       .innerText.replace("£", " £ ");
-    window.location.href = `Checkout.html?totalPrice=${totalPrice}&cartDetails=${encodedCartDetails}`;
+    window.location.href = `checkout.html?totalPrice=${totalPrice}&cartDetails=${encodedCartDetails}`;
   } else {
     alert("Please select an item first");
   }
