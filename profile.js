@@ -7,34 +7,34 @@ let questions = [
     "Agree with privacy terms (Yes/No) : ",
   ],
   ["Rational : ", "DoA : ", "Task : ", "Place : ", "Assignment type : "],
-  //   [
-  //     "Area of study : ",
-  //     "Highest degree : ",
-  //     "University/Institution : ",
-  //     "Completion year : ",
-  //     "Country : ",
-  //   ],
-  //   [
-  //     "Availability for volunteering : ",
-  //     "Surname : ",
-  //     "Tel. No. : ",
-  //     "Email : ",
-  //     "Game on : ",
-  //   ],
+  [
+    "Area of study : ",
+    "Highest degree : ",
+    "University/Institution : ",
+    "Completion year : ",
+    "Country : ",
+  ],
+  [
+    "Availability for volunteering : ",
+    "Surname : ",
+    "Tel. No. : ",
+    "Email : ",
+    "Game on : ",
+  ],
 ];
 
 let answers = [
   ["", "", "", "", ""],
   ["", "", "", "", ""],
-  //   ["", "", "", "", ""],
-  //   ["", "", "", "", ""],
+  ["", "", "", "", ""],
+  ["", "", "", "", ""],
 ];
 
 let questionType = [
   "<b>Personal Details</b>",
   "<b>Volunteering Tasks</b>",
-  //   "<b>Qualifiations</b>",
-  //   "<b>Avaiability and contact</b>",
+  "<b>Qualifiations</b>",
+  "<b>Avaiability and contact</b>",
 ];
 
 let questionPlaceHolder = [
@@ -46,20 +46,20 @@ let questionPlaceHolder = [
     "Agree with privacy terms (Yes/No) : ",
   ],
   ["Rational : ", "DoA : ", "Task : ", "Place : ", "Assignment type : "],
-  //   [
-  //     "Area of study : ",
-  //     "Highest degree : ",
-  //     "University/Institution : ",
-  //     "Completion year : ",
-  //     "Country : ",
-  //   ],
-  //   [
-  //     "Availability for volunteering : ",
-  //     "Surname : ",
-  //     "Tel. No. : ",
-  //     "Email : ",
-  //     "Game on : ",
-  //   ],
+  [
+    "Area of study : ",
+    "Highest degree : ",
+    "University/Institution : ",
+    "Completion year : ",
+    "Country : ",
+  ],
+  [
+    "Availability for volunteering : ",
+    "Surname : ",
+    "Tel. No. : ",
+    "Email : ",
+    "Game on : ",
+  ],
 ];
 
 const data1 = document.getElementsByClassName("data1");
@@ -73,6 +73,7 @@ let i = 0,
 
 document.querySelector(".current_stage_name").innerHTML = `${questionType[i]}`;
 document.querySelector(".current_question").innerHTML = `${questions[i][j]}`;
+document.querySelector("input").placeholder = `${questionPlaceHolder[i][j]}`;
 
 function gettingTheAnswer() {
   if (i == questionType.length && j == 0) {
@@ -88,7 +89,9 @@ function gettingTheAnswer() {
     let profile_progressbar = ((i + 1) / questions.length) * 100;
     document.querySelector(
       ".profile_progress"
-    ).innerHTML = `<div class="progress-bar" style="width: ${profile_progressbar}%;">${profile_progressbar}%</div>`;
+    ).innerHTML = `<div class="empty-progress-bar" style="width:80%">.</div> <div class="progress-bar" style="width: ${
+      profile_progressbar - 20
+    }%;">${profile_progressbar}%</div>`;
   }
   let temp = document.querySelector("input").value;
   console.log(temp);
@@ -103,14 +106,16 @@ function gettingTheAnswer() {
   let current_stage_progressbar = (j / questions[i].length) * 100;
   document.querySelector(
     ".current_stage_progress"
-  ).innerHTML = `<div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
+  ).innerHTML = `<div class="empty-progress-bar" style="width:80%">.</div><div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
   if (i == questionType.length && j == 0) {
     alert("All done!!!");
     document.querySelector(".current_stage_name").innerHTML = `Thank you...`;
     document.querySelector(".current_question").innerHTML = ``;
+    document.querySelector("input").placeholder = "";
     return;
   }
   document.querySelector(".current_question").innerHTML = `${questions[i][j]}`;
+  document.querySelector("input").placeholder = `${questionPlaceHolder[i][j]}`;
 }
 
 function goingToPreviousQuestion() {
@@ -122,7 +127,9 @@ function goingToPreviousQuestion() {
     let profile_progressbar = (i / questions.length) * 100;
     document.querySelector(
       ".profile_progress"
-    ).innerHTML = `<div class="progress-bar" style="width: ${profile_progressbar}%;">${profile_progressbar}%</div>`;
+    ).innerHTML = `<div class="empty-progress-bar" style="width:80%">.</div> <div class="progress-bar" style="width: ${
+      profile_progressbar - 20
+    }%;">${profile_progressbar}%</div>`;
   } else {
     j -= 1;
   }
@@ -130,10 +137,11 @@ function goingToPreviousQuestion() {
     ".current_stage_name"
   ).innerHTML = `${questionType[i]}`;
   document.querySelector(".current_question").innerHTML = `${questions[i][j]}`;
+  document.querySelector("input").placeholder = `${questionPlaceHolder[i][j]}`;
   let current_stage_progressbar = (j / questions[i].length) * 100;
   document.querySelector(
     ".current_stage_progress"
-  ).innerHTML = `<div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
+  ).innerHTML = `<div class="empty-progress-bar" style="width:80%">.</div><div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
 }
 
 function skippingToNextQuestion() {
@@ -152,13 +160,16 @@ function skippingToNextQuestion() {
     let profile_progressbar = (i / questions.length) * 100;
     document.querySelector(
       ".profile_progress"
-    ).innerHTML = `<div class="progress-bar" style="width: ${profile_progressbar}%;">${profile_progressbar}%</div>`;
+    ).innerHTML = `<div class="empty-progress-bar" style="width:80%">.</div> <div class="progress-bar" style="width: ${
+      profile_progressbar - 20
+    }%;">${profile_progressbar}%</div>`;
   } else {
     j += 1;
   }
   document.querySelector(".current_question").innerHTML = `${questions[i][j]}`;
+  document.querySelector("input").placeholder = `${questionPlaceHolder[i][j]}`;
   let current_stage_progressbar = (j / questions[i].length) * 100;
   document.querySelector(
     ".current_stage_progress"
-  ).innerHTML = `<div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
+  ).innerHTML = `<div class="empty-progress-bar" style="width:80%">.</div> <div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
 }

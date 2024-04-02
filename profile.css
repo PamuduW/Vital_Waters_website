@@ -1,14 +1,71 @@
-.progress-bar{
-    background-color: #4caf50;
-    text-align: center;
-    line-height: 30px;
-    color: white;
-    margin-left: 10%;
-    margin-right: 10%;
-    border-radius: 20px;
-    margin: 40px;
-  }
+body {
+  text-align: center;
+  align-items: center;
+}
 
-  .set1, .set2, .set3, .set4 {
-    display: none;
-  }
+.box {
+  background-color: antiquewhite;
+  border-radius: 20px;
+  margin: 40px;
+}
+
+.current_stage_progress,
+.profile_progress {
+  height: 40px;
+}
+
+.empty-progress-bar,
+.progress-bar {
+  line-height: 30px;
+  margin: 40px;
+  margin-left: 10%;
+  border-radius: 20px;
+}
+
+.empty-progress-bar {
+  background-color: #8c928c;
+  color: white;
+}
+
+.progress-bar {
+  background-color: #239923;
+  color: white;
+  top: -70px;
+  position: relative;
+
+}
+
+.set1,
+.set2,
+.set3,
+.set4 {
+  display: none;
+}
+
+fieldset {
+  border-radius: 20px;
+  width: 35%;
+  text-align: left;
+  margin: 20px;
+  margin-left: 31%;
+}
+
+.data{
+  margin: 20px;
+  margin-left: 100px;
+}
+
+input{
+  width: 230px;
+}
+
+.current_stage_name, .current_question, .current_answer{
+  margin: 20px;
+}
+
+button{
+  margin: 30px;
+  border-radius: 20px;
+  height: 35px;
+  width: 160px;
+}
