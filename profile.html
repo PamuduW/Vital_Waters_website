@@ -13,9 +13,12 @@
         <div class="current_stage_name"></div>
         <div class="current_question"></div>
         <div class="current_answer">
-            <input type="text" placeholder="boom">
+            <input type="text" placeholder="">
         </div>
-        <div class="current_stage_progress"></div>
+        <div class="current_stage_progress">
+            <div class="empty-progress-bar" style="width:80%">0%</div>
+            <div class="progress-bar"></div>
+        </div>
 
         <div class="buttons">
             <button id="next-question" onclick="gettingTheAnswer()">Next Question</button>
@@ -25,12 +28,13 @@
     </div>
 
     <div class="profile_progress">
-        <div class="progress-bar" style="width:100%">0%</div>;
+        <div class="empty-progress-bar" style="width:80%">0%</div>
+        <div class="progress-bar"></div>
     </div>
 
     <fieldset class="set1">
         <legend><b>Personal Details</b></legend>
-        <div>
+        <div class="data">
             <div class="data1"></div>
             <div class="data1"></div>
             <div class="data1"></div>
@@ -41,7 +45,7 @@
 
     <fieldset class="set2">
         <legend><b>Volunteering Tasks</b></legend>
-        <div>
+        <div class="data">
             <div class="data2"></div>
             <div class="data2"></div>
             <div class="data2"></div>
@@ -52,7 +56,7 @@
 
     <fieldset class="set3">
         <legend><b>Qualifiations</b></legend>
-        <div>
+        <div class="data">
             <div class="data3"></div>
             <div class="data3"></div>
             <div class="data3"></div>
@@ -63,7 +67,7 @@
 
     <fieldset class="set4">
         <legend><b>Avaiability and contact</b></legend>
-        <div>
+        <div class="data">
             <div class="data4"></div>
             <div class="data4"></div>
             <div class="data4"></div>
