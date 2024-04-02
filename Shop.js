@@ -174,11 +174,13 @@ const changeQuantity = (cartProductId, type) => {
 function checkOut() {
   if (carts.length > 0) {
     let cartDetails = carts.map((cartItem) => {
-      let productDetails = listProducts.find((product) => product.id == cartItem.cartProductId);
+      let productDetails = listProducts.find(
+        (product) => product.id == cartItem.cartProductId
+      );
       if (cartItem.colorChoice == 0) {
-        color = "Black";
+        color = productDetails.color[0];
       } else {
-        color = "White";
+        color = productDetails.color[1];
       }
       return {
         start: "...",
@@ -188,11 +190,9 @@ function checkOut() {
         colorChoice: "/" + color + "/",
       };
     });
-    let encodedCartDetails = encodeURIComponent(JSON.stringify(cartDetails));
-    let completeTotalPrice = document
-      .querySelector(".completeTotalPrice")
-      .innerText.replace("£", " £ ");
-    window.location.href = `checkout.html?totalPrice=${completeTotalPrice}&cartDetails=${encodedCartDetails}`;
+    let cartDetailsJSON = encodeURIComponent(JSON.stringify(cartDetails));
+    let completeTotalPrice = document.querySelector(".completeTotalPrice").innerText;
+    window.location.href = `checkout.html?totalPrice=${completeTotalPrice}&cartDetails=${cartDetailsJSON}`;
   } else {
     alert("Please select an item first");
   }
