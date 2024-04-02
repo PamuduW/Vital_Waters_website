@@ -1,10 +1,6 @@
-let iconCart = document.querySelector(".cart-icon");
-let closeCart = document.querySelector(".close");
 let body = document.querySelector("body");
-let listProductHTML = document.querySelector(".listOfProduct");
-let listCartHTML = document.querySelector(".listOfCartItems");
-let iconCartSpan = document.querySelector(".cart-icon span");
-
+let listOfProduct = document.querySelector(".listOfProduct");
+let listOfCartItems = document.querySelector(".listOfCartItems");
 let carts = [];
 let listProducts = [
   {
@@ -12,7 +8,6 @@ let listProducts = [
     name: "T-shirt 1",
     price: 100,
     color: ["black", "white"],
-    alt: "T-shirt 1",
     image: [
       "Pictures/Shop/T-shirt1_black.png",
       "Pictures/Shop/T-shirt1_white.png",
@@ -23,7 +18,6 @@ let listProducts = [
     name: "Coffee-Mug",
     price: 200,
     color: ["black", "white"],
-    alt: "Coffee-Mug",
     image: [
       "Pictures/Shop/coffee-mug_black.png",
       "Pictures/Shop/coffee-mug_white.png",
@@ -31,75 +25,73 @@ let listProducts = [
   },
 ];
 
-iconCart.addEventListener("click", () => {
+document.querySelector(".cart-icon").addEventListener("click", () => {
   body.classList.toggle("showCart");
 });
 
-closeCart.addEventListener("click", () => {
+document.querySelector(".closeButton").addEventListener("click", () => {
   body.classList.toggle("showCart");
 });
 
-const addDataToHTML = () => {
-  listProductHTML.innerHTML = "";
-  if (listProducts.length > 0) {
-    listProducts.forEach((product) => {
-      let colorChoiseOpt = 0;
-      let newProduct = document.createElement("div");
-      newProduct.classList.add("productItem");
-      newProduct.dataset.id = product.id;
-      newProduct.innerHTML = `
-        <img src="${product.image[colorChoiseOpt]}" alt="${product.alt}" width="260px" height="200px" class="productItem-image">
+const showingShopBody = () => {
+  listOfProduct.innerHTML = "";
+  listProducts.forEach((product) => {
+    let colorChoiseOpt = 0;
+    let newProductItem = document.createElement("div");
+    newProductItem.classList.add("currentProductItem");
+    newProductItem.dataset.id = product.id;
+    newProductItem.innerHTML = `
+        <img src = "${product.image[colorChoiseOpt]}" alt = "${product.name}" width = "200px" height = "285px" class = "currentProductItem-image">
         <h2>${product.name}</h2>
-        <div class="colorchoise">
-          <input class="color1" type="radio" name="${product.name}" id="0" value="0" checked>
-          <input class="color2" type="radio" name="${product.name}" id="1" value="1">
+        <div class = "colorchoise">
+          <input class = "color1" type = "radio" name = "${product.name}" id = "0" value = 0 checked>
+          <input class = "color2" type = "radio" name = "${product.name}" id = "1" value = 1>
         </div>
-        <div class="price">&#163; ${product.price}</div>
-        <button class="addCart">
+        <div class = "price">&#163; ${product.price}</div>
+        <button class = "addCart">
           Add to Cart
         </button>
         `;
-      const colorChoices = newProduct.querySelectorAll(".colorchoise input");
-      colorChoices.forEach((choice) => {
-        choice.addEventListener("change", (event) => {
-          const value = event.target.value;
-          const newImage = product.image[parseInt(value)];
-          newProduct.querySelector(".productItem-image").src = newImage;
-        });
+    newProductItem.querySelectorAll(".colorchoise input").forEach((choice) => {
+      choice.addEventListener("change", (event) => {
+        const value = event.target.value;
+        newProductItem.querySelector(".currentProductItem-image").src =
+          product.image[value];
       });
-
-      listProductHTML.appendChild(newProduct);
     });
-  }
+    listOfProduct.appendChild(newProductItem);
+  });
 };
 
-listProductHTML.addEventListener("click", (event) => {
-  let positionClick = event.target;
-  if (positionClick.classList.contains("addCart")) {
-    let product_id = positionClick.parentElement.dataset.id;
+listOfProduct.addEventListener("click", (event) => {
+  let clickedOn = event.target;
+  if (clickedOn.classList.contains("addCart")) {
+    let cartProductId = clickedOn.parentElement.dataset.id;
     let colorChoice = parseInt(
-      positionClick.parentElement.querySelector(".color2").checked ? "1" : "0"
+      clickedOn.parentElement.querySelector(".color2").checked ? "1" : "0"
     );
-    addToCart(product_id, colorChoice);
+    addToCart(cartProductId, colorChoice);
   }
 });
 
-const addToCart = (product_id, colorChoice) => {
+const addToCart = (cartProductId, colorChoice) => {
   let productInCart = carts.find(
     (value) =>
-      value.product_id == product_id && value.colorChoice == colorChoice
+      value.cartProductId == cartProductId && value.colorChoice == colorChoice
   );
   if (carts.length <= 0) {
     carts = [
       {
-        product_id: product_id,
+        cartProductIdmix: cartProductId+colorChoice,
+        cartProductId: cartProductId,
         quantity: 1,
         colorChoice: colorChoice,
       },
     ];
   } else if (!productInCart) {
     carts.push({
-      product_id: product_id,
+      cartProductIdmix: cartProductId+colorChoice,
+      cartProductId: cartProductId,
       quantity: 1,
       colorChoice: colorChoice,
     });
@@ -110,7 +102,7 @@ const addToCart = (product_id, colorChoice) => {
 };
 
 const addCartToHTML = () => {
-  listCartHTML.innerHTML = "";
+  listOfCartItems.innerHTML = "";
   let totalQuantity = 0;
   let totalPrice = 0;
   if (carts.length > 0) {
@@ -118,17 +110,17 @@ const addCartToHTML = () => {
       totalQuantity += cart.quantity;
       let newCart = document.createElement("div");
       newCart.classList.add("cartItem");
-      newCart.dataset.id = cart.product_id;
+      newCart.dataset.id = cart.cartProductIdmix;
       let positionProduct = listProducts.findIndex(
-        (value) => value.id == cart.product_id
+        (value) => value.id == cart.cartProductId
       );
       let info = listProducts[positionProduct];
       totalPrice += info.price * cart.quantity;
       let selectedImage = info.image[cart.colorChoice];
       newCart.innerHTML = `<div class="image">
           <img src="${selectedImage}" alt="${
-        info.alt
-      }" width="200px" height="260px">
+        info.name
+      }" width="200px" height="285px">
         </div>
         <div class="name">
           ${info.name} <br> Color : ${info.color[cart.colorChoice]}
@@ -141,33 +133,33 @@ const addCartToHTML = () => {
           <span>${cart.quantity}</span>
           <span class="plus">></span>
         </div>`;
-      listCartHTML.appendChild(newCart);
+      listOfCartItems.appendChild(newCart);
     });
   }
-  iconCartSpan.innerText = totalQuantity;
+  document.querySelector(".cart-icon span").innerText = totalQuantity;
   document.querySelector(
     ".completeTotalPrice"
   ).innerHTML = `Total Price : £ ${totalPrice}`;
 };
 
-listCartHTML.addEventListener("click", (event) => {
-  let positionClick = event.target;
+listOfCartItems.addEventListener("click", (event) => {
+  let clickedOn = event.target;
   if (
-    positionClick.classList.contains("minus") ||
-    positionClick.classList.contains("plus")
+    clickedOn.classList.contains("minus") ||
+    clickedOn.classList.contains("plus")
   ) {
-    let product_id = positionClick.parentElement.parentElement.dataset.id;
+    let cartProductId = clickedOn.parentElement.parentElement.dataset.id;
     let type = "minus";
-    if (positionClick.classList.contains("plus")) {
+    if (clickedOn.classList.contains("plus")) {
       type = "plus";
     }
-    changeQuantity(product_id, type);
+    changeQuantity(cartProductId, type);
   }
 });
 
-const changeQuantity = (product_id, type, colorChoice) => {
+const changeQuantity = (cartProductId, type) => {
   let positionItemInCart = carts.findIndex(
-    (value) => value.product_id == product_id
+    (value) => value.cartProductIdmix == cartProductId
   );
   if (positionItemInCart >= 0) {
     let product = carts[positionItemInCart];
@@ -184,10 +176,6 @@ const changeQuantity = (product_id, type, colorChoice) => {
         }
         break;
     }
-
-    if (colorChoice !== undefined) {
-      product.colorChoice = colorChoice;
-    }
   }
   addCartToHTML();
 };
@@ -195,7 +183,7 @@ const changeQuantity = (product_id, type, colorChoice) => {
 function checkOut() {
   if (carts.length > 0) {
     let cartDetails = carts.map((cartItem) => {
-      let product = listProducts.find((p) => p.id == cartItem.product_id);
+      let product = listProducts.find((p) => p.id == cartItem.cartProductId);
       if (cartItem.colorChoice == 0) {
         color = "Black";
       } else {
@@ -221,4 +209,4 @@ function checkOut() {
   }
 }
 
-addDataToHTML();
+showingShopBody();
