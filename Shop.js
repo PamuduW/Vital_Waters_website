@@ -45,10 +45,10 @@ const addDataToHTML = () => {
     listProducts.forEach((product) => {
       let colorChoiseOpt = 0;
       let newProduct = document.createElement("div");
-      newProduct.classList.add("item");
+      newProduct.classList.add("productItem");
       newProduct.dataset.id = product.id;
       newProduct.innerHTML = `
-        <img src="${product.image[colorChoiseOpt]}" alt="${product.alt}" width="181px" height="200px" class="item-image">
+        <img src="${product.image[colorChoiseOpt]}" alt="${product.alt}" width="181px" height="200px" class="productItem-image">
         <h2>${product.name}</h2>
         <div class="colorchoise">
           <input class="color1" type="radio" name="${product.name}" id="0" value="0" checked>
@@ -64,7 +64,7 @@ const addDataToHTML = () => {
         choice.addEventListener("change", (event) => {
           const value = event.target.value;
           const newImage = product.image[parseInt(value)];
-          newProduct.querySelector(".item-image").src = newImage;
+          newProduct.querySelector(".productItem-image").src = newImage;
         });
       });
 
@@ -117,7 +117,7 @@ const addCartToHTML = () => {
     carts.forEach((cart) => {
       totalQuantity += cart.quantity;
       let newCart = document.createElement("div");
-      newCart.classList.add("item");
+      newCart.classList.add("cartItem");
       newCart.dataset.id = cart.product_id;
       let positionProduct = listProducts.findIndex(
         (value) => value.id == cart.product_id
@@ -146,7 +146,7 @@ const addCartToHTML = () => {
   }
   iconCartSpan.innerText = totalQuantity;
   document.querySelector(
-    ".totalPrice"
+    ".completeTotalPrice"
   ).innerHTML = `Total Price : £ ${totalPrice}`;
 };
 
@@ -194,10 +194,9 @@ const changeQuantity = (product_id, type, colorChoice) => {
 
 function checkOut() {
   if (carts.length > 0) {
-    // Prepare an array of objects with item details
-    let cartDetails = carts.map((item) => {
-      let product = listProducts.find((p) => p.id == item.product_id);
-      if (item.colorChoice == 0) {
+    let cartDetails = carts.map((cartItem) => {
+      let product = listProducts.find((p) => p.id == cartItem.product_id);
+      if (cartItem.colorChoice == 0) {
         color = "Black";
       } else {
         color = "White";
@@ -206,7 +205,7 @@ function checkOut() {
         start: "...",
         name: "/" + product.name + "/",
         price: "/" + product.price + "/",
-        quantity: "/" + item.quantity + "/",
+        quantity: "/" + cartItem.quantity + "/",
         colorChoice: "/" + color + "/",
       };
     });
@@ -214,7 +213,7 @@ function checkOut() {
     // Convert the array to a JSON string and URL-encode it
     let encodedCartDetails = encodeURIComponent(JSON.stringify(cartDetails));
     let totalPrice = document
-      .querySelector(".totalPrice")
+      .querySelector(".completeTotalPrice")
       .innerText.replace("£", " £ ");
     window.location.href = `checkout.html?totalPrice=${totalPrice}&cartDetails=${encodedCartDetails}`;
   } else {
