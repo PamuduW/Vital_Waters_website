@@ -151,11 +151,11 @@ body.showCart .container {
     background-color: #eee;
 }
 
-.cartWindow .listOfCartItems .cartItem img {
+.cartWindow .listOfCartItems .currentCartItem img {
     width: 100%;
 }
 
-.cartWindow .listOfCartItems .cartItem {
+.cartWindow .listOfCartItems .currentCartItem {
     display: grid;
     grid-template-columns: 70px 150px 50px 1fr;
     gap: 10px;
@@ -182,7 +182,7 @@ body.showCart .container {
     color: #eee;
 }
 
-.listOfCartItems .cartItem:nth-child(even) {
+.listOfCartItems .currentCartItem:nth-child(even) {
     background-color: #eee1;
 }
 

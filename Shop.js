@@ -79,18 +79,9 @@ const addToCart = (cartProductId, colorChoice) => {
     (value) =>
       value.cartProductId == cartProductId && value.colorChoice == colorChoice
   );
-  if (carts.length <= 0) {
-    carts = [
-      {
-        cartProductIdmix: cartProductId+colorChoice,
-        cartProductId: cartProductId,
-        quantity: 1,
-        colorChoice: colorChoice,
-      },
-    ];
-  } else if (!productInCart) {
+  if (!productInCart) {
     carts.push({
-      cartProductIdmix: cartProductId+colorChoice,
+      cartColorProductId: cartProductId + colorChoice,
       cartProductId: cartProductId,
       quantity: 1,
       colorChoice: colorChoice,
@@ -103,43 +94,45 @@ const addToCart = (cartProductId, colorChoice) => {
 
 const addCartToHTML = () => {
   listOfCartItems.innerHTML = "";
-  let totalQuantity = 0;
-  let totalPrice = 0;
+  let totalCartQuantity = 0;
+  let completeTotalPrice = 0;
   if (carts.length > 0) {
     carts.forEach((cart) => {
-      totalQuantity += cart.quantity;
-      let newCart = document.createElement("div");
-      newCart.classList.add("cartItem");
-      newCart.dataset.id = cart.cartProductIdmix;
-      let positionProduct = listProducts.findIndex(
+      totalCartQuantity += cart.quantity;
+      let newCartItem = document.createElement("div");
+      newCartItem.classList.add("currentCartItem");
+      newCartItem.dataset.id = cart.cartColorProductId;
+      let productPosition = listProducts.findIndex(
         (value) => value.id == cart.cartProductId
       );
-      let info = listProducts[positionProduct];
-      totalPrice += info.price * cart.quantity;
-      let selectedImage = info.image[cart.colorChoice];
-      newCart.innerHTML = `<div class="image">
-          <img src="${selectedImage}" alt="${
-        info.name
-      }" width="200px" height="285px">
+      let currentCartItemInfo = listProducts[productPosition];
+      completeTotalPrice += currentCartItemInfo.price * cart.quantity;
+      let selectedImage = currentCartItemInfo.image[cart.colorChoice];
+      newCartItem.innerHTML = `
+        <div class = "image">
+          <img src = "${selectedImage}" alt = "${
+        currentCartItemInfo.name
+      }" width = "200px" height = "285px">
         </div>
-        <div class="name">
-          ${info.name} <br> Color : ${info.color[cart.colorChoice]}
+        <div class = "name">
+          ${currentCartItemInfo.name} <br> 
+          Color : ${currentCartItemInfo.color[cart.colorChoice]}
         </div>
-        <div class="totalPrice">
-          £ ${info.price * cart.quantity}
+        <div class = "ItemQuantityPrice">
+          £ ${currentCartItemInfo.price * cart.quantity}
         </div>
-        <div class="quantity">
-          <span class="minus"><</span>
+        <div class = "quantity">
+          <span class = "minus"><</span>
           <span>${cart.quantity}</span>
-          <span class="plus">></span>
+          <span class = "plus">></span>
         </div>`;
-      listOfCartItems.appendChild(newCart);
+      listOfCartItems.appendChild(newCartItem);
     });
   }
-  document.querySelector(".cart-icon span").innerText = totalQuantity;
+  document.querySelector(".cart-icon span").innerText = totalCartQuantity;
   document.querySelector(
     ".completeTotalPrice"
-  ).innerHTML = `Total Price : £ ${totalPrice}`;
+  ).innerHTML = `Total Price : £ ${completeTotalPrice}`;
 };
 
 listOfCartItems.addEventListener("click", (event) => {
@@ -159,23 +152,21 @@ listOfCartItems.addEventListener("click", (event) => {
 
 const changeQuantity = (cartProductId, type) => {
   let positionItemInCart = carts.findIndex(
-    (value) => value.cartProductIdmix == cartProductId
+    (value) => value.cartColorProductId == cartProductId
   );
-  if (positionItemInCart >= 0) {
-    let product = carts[positionItemInCart];
-    switch (type) {
-      case "plus":
-        product.quantity += 1;
-        break;
-      case "minus":
-        let valueChange = product.quantity - 1;
-        if (valueChange > 0) {
-          product.quantity = valueChange;
-        } else {
-          carts.splice(positionItemInCart, 1);
-        }
-        break;
-    }
+  let product = carts[positionItemInCart];
+  switch (type) {
+    case "plus":
+      product.quantity += 1;
+      break;
+    case "minus":
+      let valueChange = product.quantity - 1;
+      if (valueChange > 0) {
+        product.quantity = valueChange;
+      } else {
+        carts.splice(positionItemInCart, 1);
+      }
+      break;
   }
   addCartToHTML();
 };
@@ -183,7 +174,7 @@ const changeQuantity = (cartProductId, type) => {
 function checkOut() {
   if (carts.length > 0) {
     let cartDetails = carts.map((cartItem) => {
-      let product = listProducts.find((p) => p.id == cartItem.cartProductId);
+      let productDetails = listProducts.find((product) => product.id == cartItem.cartProductId);
       if (cartItem.colorChoice == 0) {
         color = "Black";
       } else {
@@ -191,19 +182,17 @@ function checkOut() {
       }
       return {
         start: "...",
-        name: "/" + product.name + "/",
-        price: "/" + product.price + "/",
+        name: "/" + productDetails.name + "/",
+        price: "/" + productDetails.price + "/",
         quantity: "/" + cartItem.quantity + "/",
         colorChoice: "/" + color + "/",
       };
     });
-
-    // Convert the array to a JSON string and URL-encode it
     let encodedCartDetails = encodeURIComponent(JSON.stringify(cartDetails));
-    let totalPrice = document
+    let completeTotalPrice = document
       .querySelector(".completeTotalPrice")
       .innerText.replace("£", " £ ");
-    window.location.href = `checkout.html?totalPrice=${totalPrice}&cartDetails=${encodedCartDetails}`;
+    window.location.href = `checkout.html?totalPrice=${completeTotalPrice}&cartDetails=${encodedCartDetails}`;
   } else {
     alert("Please select an item first");
   }
