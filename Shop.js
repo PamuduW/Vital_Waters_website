@@ -48,7 +48,7 @@ const addDataToHTML = () => {
       newProduct.classList.add("productItem");
       newProduct.dataset.id = product.id;
       newProduct.innerHTML = `
-        <img src="${product.image[colorChoiseOpt]}" alt="${product.alt}" width="181px" height="200px" class="productItem-image">
+        <img src="${product.image[colorChoiseOpt]}" alt="${product.alt}" width="260px" height="200px" class="productItem-image">
         <h2>${product.name}</h2>
         <div class="colorchoise">
           <input class="color1" type="radio" name="${product.name}" id="0" value="0" checked>
@@ -128,7 +128,7 @@ const addCartToHTML = () => {
       newCart.innerHTML = `<div class="image">
           <img src="${selectedImage}" alt="${
         info.alt
-      }" width="181px" height="200px">
+      }" width="200px" height="260px">
         </div>
         <div class="name">
           ${info.name} <br> Color : ${info.color[cart.colorChoice]}

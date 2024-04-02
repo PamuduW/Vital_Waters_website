@@ -56,6 +56,7 @@ header .cart-icon span {
 
 .listOfProduct .productItem {
     background-color: #eeeee6;
+    width: 200px;
     padding: 20px;
     border-radius: 20px;
 }
@@ -101,11 +102,11 @@ header .cart-icon span {
 }
 
 .cartWindow {
-    width: 400px;
+    width: 600px;
     background-color: #353432;
     color: #eee;
     position: fixed;
-    inset: 0 -400px 0 auto;
+    inset: 0 -600px 0 auto;
     display: grid;
     grid-template-rows: 70px 1fr 70px;
     transition: .5s;
