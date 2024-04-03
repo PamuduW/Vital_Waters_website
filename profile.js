@@ -76,6 +76,7 @@ document.querySelector(".current_question").innerHTML = `${questions[i][j]}`;
 document.querySelector("input").placeholder = `${questionPlaceHolder[i][j]}`;
 
 function gettingTheAnswer() {
+  let current_stage_progressbar = 0;
   if (i == questionType.length && j == 0) {
     alert("All done!!! Thank you...");
     return;
@@ -94,7 +95,6 @@ function gettingTheAnswer() {
     }%;">${profile_progressbar}%</div>`;
   }
   let temp = document.querySelector("input").value;
-  console.log(temp);
   answers[i][j] = temp;
   dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
   document.querySelector(`.set${i + 1}`).style.display = "block";
@@ -103,7 +103,11 @@ function gettingTheAnswer() {
   if (j == questions[i].length) {
     (i += 1), (j = 0);
   }
-  let current_stage_progressbar = (j / questions[i].length) * 100;
+  if (i != questions.length) {
+    current_stage_progressbar = (j / questions[i].length) * 100;
+  } else {
+    current_stage_progressbar = 80;
+  }
   document.querySelector(
     ".current_stage_progress"
   ).innerHTML = `<div class="empty-progress-bar" style="width:80%">.</div><div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
@@ -166,9 +170,20 @@ function skippingToNextQuestion() {
   } else {
     j += 1;
   }
+  if (i == questionType.length && j == 0) {
+    alert("All done!!!");
+    document.querySelector(".current_stage_name").innerHTML = `Thank you...`;
+    document.querySelector(".current_question").innerHTML = ``;
+    document.querySelector("input").placeholder = "";
+    return;
+  }
   document.querySelector(".current_question").innerHTML = `${questions[i][j]}`;
   document.querySelector("input").placeholder = `${questionPlaceHolder[i][j]}`;
-  let current_stage_progressbar = (j / questions[i].length) * 100;
+  if (i != questions.length) {
+    current_stage_progressbar = (j / questions[i].length) * 100;
+  } else {
+    current_stage_progressbar = 80;
+  }
   document.querySelector(
     ".current_stage_progress"
   ).innerHTML = `<div class="empty-progress-bar" style="width:80%">.</div> <div class="progress-bar" style="width: ${current_stage_progressbar}%;">${current_stage_progressbar}%</div>`;
