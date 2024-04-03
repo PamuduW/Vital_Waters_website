@@ -16,10 +16,10 @@ let questions = [
   ],
   [
     "Availability for volunteering : ",
-    "Surname : ",
+    "Address : ",
     "Tel. No. : ",
     "Email : ",
-    "Game on : ",
+    "Confirm all the above data is true (Yes/No) : ",
   ],
 ];
 
@@ -39,26 +39,26 @@ let questionType = [
 
 let questionPlaceHolder = [
   [
-    "Name : ",
-    "Surname : ",
-    "Age : ",
+    "Input firstname",
+    "Input surname : ",
+    "Input age",
     "Gender (M/F) : ",
     "Agree with privacy terms (Yes/No) : ",
   ],
   ["Rational : ", "DoA : ", "Task : ", "Place : ", "Assignment type : "],
   [
-    "Area of study : ",
-    "Highest degree : ",
-    "University/Institution : ",
-    "Completion year : ",
-    "Country : ",
+    "Input your area of study",
+    "What is your highest degree of education ",
+    "University/Institution",
+    "Completion year",
+    "Country",
   ],
   [
-    "Availability for volunteering : ",
-    "Surname : ",
+    "Availability for volunteering",
+    "Address",
     "Tel. No. : ",
     "Email : ",
-    "Game on : ",
+    "Confirm all the above data is true (Yes/No) :",
   ],
 ];
 
