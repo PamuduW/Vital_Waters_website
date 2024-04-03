@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200..700&family=Poppins:ital,wght@1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 body {
-    font-family: 'Poppins', sans-serif;
     margin: 0;
+    font-family: "Poppins", sans-serif;
     background-color: #555;
 }
 
@@ -130,6 +131,7 @@ body.showCart .container {
     padding: 20px;
     margin: 0;
     font-weight: 300;
+    margin-bottom: 40px;
 }
 
 .completeTotalPrice {
@@ -159,12 +161,13 @@ body.showCart .container {
 }
 
 .currentCartItem img {
-    width: 100%;
+    width: 90%;
+    height: 90%;
 }
 
 .currentCartItem {
     display: grid;
-    grid-template-columns: 70px 150px 50px 1fr;
+    grid-template-columns: 170px 120px 50px 1fr;
     gap: 10px;
     text-align: center;
     align-items: center;
@@ -187,27 +190,32 @@ body.showCart .container {
 .quantity span:nth-child(2) {
     background-color: transparent;
     color: #eee;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .currentCartItem:nth-child(even) {
     background-color: #eee1;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .listOfCartItems {
     overflow: auto;
+    margin-top: 50px;
 }
 
 .listOfCartItems::-webkit-scrollbar {
     width: 0;
 }
 
-@media screen and (max-width:992px) {
+@media screen and (max-width:1100px) {
     .listOfProduct {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:880px) {
     .listOfProduct {
         grid-template-columns: repeat(2, 1fr);
     }

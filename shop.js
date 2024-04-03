@@ -101,7 +101,7 @@ const showingShopBody = () => {
     newProductItem.classList.add("currentProductItem");
     newProductItem.dataset.id = product.id;
     newProductItem.innerHTML = `
-        <img src = "${product.image[colorChoiseOpt]}" alt = "${product.name}" width = "200px" height = "285px" class = "currentProductItem-image">
+        <img src = "${product.image[colorChoiseOpt]}" alt = "${product.name}" width = "230px" height = "300px" class = "currentProductItem-image">
         <h2>${product.name}</h2>
         <div class = "colorchoise">
           <input class = "color1" type = "radio" name = "${product.name}" id = "0" value = 0 checked style="accent-color: ${product.color[0]};">
@@ -172,7 +172,7 @@ const addCartToHTML = () => {
         <div class = "image">
           <img src = "${selectedImage}" alt = "${
         currentCartItemInfo.name
-      }" width = "200px" height = "285px">
+      }" width = "80px" height = "100px">
         </div>
         <div class = "name">
           ${currentCartItemInfo.name} <br> 
