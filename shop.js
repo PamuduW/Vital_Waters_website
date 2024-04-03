@@ -44,14 +44,14 @@ const showingShopBody = () => {
         <img src = "${product.image[colorChoiseOpt]}" alt = "${product.name}" width = "200px" height = "285px" class = "currentProductItem-image">
         <h2>${product.name}</h2>
         <div class = "colorchoise">
-          <input class = "color1" type = "radio" name = "${product.name}" id = "0" value = 0 checked>
-          <input class = "color2" type = "radio" name = "${product.name}" id = "1" value = 1>
+          <input class = "color1" type = "radio" name = "${product.name}" id = "0" value = 0 checked style="accent-color: black;">
+          <input class = "color2" type = "radio" name = "${product.name}" id = "1" value = 1 style="accent-color: white;"/>
         </div>
         <div class = "price">&#163; ${product.price}</div>
         <button class = "addCart">
           Add to Cart
         </button>
-        `;
+        `;////////////////////////////////////////////////color//////////////////////////////////////
     newProductItem.querySelectorAll(".colorchoise input").forEach((choice) => {
       choice.addEventListener("change", (event) => {
         const value = event.target.value;
