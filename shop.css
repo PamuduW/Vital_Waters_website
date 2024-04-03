@@ -10,7 +10,7 @@ body {
     max-width: 90vw;
     margin: auto;
     text-align: center;
-    padding-top: 10px;
+    padding-top: 70px;
     transition: transform .5s;
 }
 
@@ -44,7 +44,7 @@ header {
 }
 
 .currentProductItem img {
-    width: 90%;
+    width: 100%;
     filter: drop-shadow(0 25px 25px #0009);
 }
 
