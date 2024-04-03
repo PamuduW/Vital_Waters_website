@@ -5,12 +5,12 @@ let carts = [];
 let listProducts = [
   {
     id: 1,
-    name: "T-shirt 1",
+    name: "T-shirt",
     price: 100,
-    color: ["black", "white"],
+    color: ["white", "blue"],
     image: [
-      "Pictures/Shop/T-shirt1_black.png",
-      "Pictures/Shop/T-shirt1_white.png",
+      "Pictures/Shop/T-shirt_white.png",
+      "Pictures/Shop/T-shirt_blue.png",
     ],
   },
   {
@@ -21,6 +21,66 @@ let listProducts = [
     image: [
       "Pictures/Shop/coffee-mug_black.png",
       "Pictures/Shop/coffee-mug_white.png",
+    ],
+  },
+  {
+    id: 3,
+    name: "T-shirt 1",
+    price: 100,
+    color: ["black", "white"],
+    image: [
+      "Pictures/Shop/T-shirt1_black.png",
+      "Pictures/Shop/T-shirt1_white.png",
+    ],
+  },
+  {
+    id: 4,
+    name: "T-shirt 2",
+    price: 100,
+    color: ["black", "white"],
+    image: [
+      "Pictures/Shop/T-shirt1_black.png",
+      "Pictures/Shop/T-shirt1_white.png",
+    ],
+  },
+  {
+    id: 5,
+    name: "T-shirt 3",
+    price: 100,
+    color: ["black", "white"],
+    image: [
+      "Pictures/Shop/T-shirt1_black.png",
+      "Pictures/Shop/T-shirt1_white.png",
+    ],
+  },
+  {
+    id: 6,
+    name: "T-shirt 4",
+    price: 100,
+    color: ["black", "white"],
+    image: [
+      "Pictures/Shop/T-shirt1_black.png",
+      "Pictures/Shop/T-shirt1_white.png",
+    ],
+  },
+  {
+    id: 7,
+    name: "T-shirt 5",
+    price: 100,
+    color: ["black", "white"],
+    image: [
+      "Pictures/Shop/T-shirt1_black.png",
+      "Pictures/Shop/T-shirt1_white.png",
+    ],
+  },
+  {
+    id: 8,
+    name: "T-shirt 6",
+    price: 100,
+    color: ["black", "white"],
+    image: [
+      "Pictures/Shop/T-shirt1_black.png",
+      "Pictures/Shop/T-shirt1_white.png",
     ],
   },
 ];
@@ -44,8 +104,8 @@ const showingShopBody = () => {
         <img src = "${product.image[colorChoiseOpt]}" alt = "${product.name}" width = "200px" height = "285px" class = "currentProductItem-image">
         <h2>${product.name}</h2>
         <div class = "colorchoise">
-          <input class = "color1" type = "radio" name = "${product.name}" id = "0" value = 0 checked style="accent-color: black;">
-          <input class = "color2" type = "radio" name = "${product.name}" id = "1" value = 1 style="accent-color: white;"/>
+          <input class = "color1" type = "radio" name = "${product.name}" id = "0" value = 0 checked style="accent-color: ${product.color[0]};">
+          <input class = "color2" type = "radio" name = "${product.name}" id = "1" value = 1 style="accent-color: ${product.color[1]};"/>
         </div>
         <div class = "price">&#163; ${product.price}</div>
         <button class = "addCart">
