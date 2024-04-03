@@ -15,8 +15,14 @@ body {
     transition: transform .5s;
 }
 
+.title{
+    font-size: 35px;
+    color: white;
+}
+
 svg {
-    width: 30px;
+    width: 40px;
+    color: white;
 }
 
 header {
