@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SVG Sitemap</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+    rect, circle {
+      cursor: pointer;
+      transition: fill 0.3s;
+      fill:whitesmoke;
+    }
+    rect:hover, circle:hover {
+      fill: lightskyblue;
+    }
+    text {
+      font-family: sans-serif;
+      font-size: 12px;
+      text-anchor: middle;
+      alignment-baseline: central;
+      fill: black;
+    }
+    .heading{
+      text-align:center ;
+      font-size: 40px;
+      margin-top: 100px;
+      margin-right: 50px;
+      color: whitesmoke;
+    }
+  </style>
+</head>
+<body>
+  <div class="heading">
+    <h1>Sitemap</h1>
+  </div>
+
+  <svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+    <!-- Define parent pages as main branches -->
+    <g id="parent1">
+      <rect id="parent1-node" x="440" y="80" width="90" height="60" rx="10" fill="#333" />
+      <text id="parent1-text" x="485" y="110">Splash Screen</text>
+      
+      <!-- Define child pages as sub-branches -->
+      <g id="parent2">
+        <line x1="485" y1="140" x2="485" y2="400" stroke="#fff" stroke-width="2" />
+        <rect id="parent2-node" x="440" y="160" width="90" height="50" rx="10" fill="#555" />
+        <text id="parent2-text" x="485" y="185">Home Page</text>
+      </g>
+
+      <g id="parent3">
+        <line x1="120" y1="295" x2="850" y2="295" stroke="#fff" stroke-width="2" />
+        <rect id="parent3-node" x="440" y="230" width="90" height="50" rx="10" fill="#555" />
+        <text id="parent3-text" x="485" y="255">Sitemap</text>
+      </g>
+
+      <g id="child1">
+        <line x1="120" y1="295" x2="120" y2="315" stroke="#fff" stroke-width="2" />
+        <rect id="child1-node" x="440" y="310" width="90" height="40" rx="10" fill="#555" />
+        <text id="child1-text" x="485" y="330">Shop</text>
+      </g>
+
+      <g id="child2">
+        <line x1="850" y1="295" x2="850" y2="315" stroke="#fff" stroke-width="2" />
+        <rect id="child2-node" x="320" y="310" width="90" height="40" rx="10" fill="#555" />
+        <text id="child2-text" x="365" y="330">Gallery</text>
+      </g>
+
+      <g id="child3">
+        <line x1="245" y1="295" x2="245" y2="315" stroke="#fff" stroke-width="2" />
+        <rect id="child3-node" x="200" y="310" width="90" height="40" rx="10" fill="#555" />
+        <text id="child3-text" x="245" y="330">Content Page</text>
+      </g>
+
+      <g id="child4">
+        <line x1="365" y1="295" x2="365" y2="310" stroke="#fff" stroke-width="2" />
+        <rect id="child4-node" x="80" y="310" width="90" height="40" rx="10" fill="#555" />
+        <text id="child4-text" x="125" y="330">User Profile</text>
+      </g>
+
+      <g id="child5">
+        <line x1="605" y1="295" x2="605" y2="315" stroke="#fff" stroke-width="2" />
+        <rect id="child5-node" x="560" y="310" width="90" height="40" rx="10" fill="#555" />
+        <text id="child5-text" x="605" y="330">Feedback Form</text>
+      </g>
+
+      <g id="child6">
+       
+        <rect id="child6-node" x="680" y="310" width="90" height="40" rx="10" fill="#555" />
+        <text id="child6-text" x="725" y="330">Page Editor</text>
+      </g>
+
+      <g id="child7">
+        
+        <rect id="child7-node" x="800" y="310" width="90" height="40" rx="10" fill="#555" />
+        <text id="child7-text" x="845" y="330">Our Team</text>
+      </g>
+
+      <g id="child8">
+        <line x1="725" y1="295" x2="725" y2="310" stroke="#fff" stroke-width="2" />
+        <rect id="child8-node" x="440" y="370" width="90" height="35" rx="10" fill="#555" />
+        <text id="child8-text" x="485" y="387">Checkout</text>
+      </g>
+
+
+      
+    </g>
+    <!-- Add more parent and child pages as needed -->
+  </svg>
+  <script>
+    // Add interactivity to nodes
+    const nodes = document.querySelectorAll('rect, circle');
+    nodes.forEach(node => {
+      node.addEventListener('click', () => {
+        
+        const urls = {
+          'parent1-node' : 'https://example.com/page1',
+          'parent2-node' : 'https://example.com/page1',
+          'parent3-node' : 'https://example.com/page1',
+          'child1-node' : 'https://example.com/page1',
+          'child2-node' : 'https://example.com/page1',
+          'child3-node' : 'https://example.com/page1',
+          'child4-node' : 'https://example.com/page1',
+          'child5-node' : 'https://example.com/page1',
+          'child6-node' : 'https://example.com/page1',
+          'child7-node' : 'https://example.com/page1',
+          'child8-node' : 'https://example.com/page1',
+          
+
+        };
+        const nodeId = node.getAttribute('id');
+
+        if(urls[nodeId]){
+          window.location.href = urls[nodeId];
+        }
+      });
+    });
+  </script>
+</body>
+</html>
