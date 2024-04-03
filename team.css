@@ -17,6 +17,7 @@
   color: #524c79;
   font-size: 100px;
   font-weight: 700;
+  margin-top: 40px;
 }
 
 .wrapper {
@@ -26,8 +27,8 @@
 }
 
 .card {
-  width: 350px;
-  height: 515px;
+  width: 300px;
+  height: 387px;
   margin: 100px auto 0;
   perspective: 1000px;
 }
@@ -121,7 +122,17 @@
   background-color: #555;
 }
 
+.back button{
+  margin: 10px;
+}
+
+.back p{
+  margin: 10px;
+}
+
 .back {
+  align-items: center;
+  text-align: center;
   background: #fff;
   color: #333;
   padding: 20px 40px;
@@ -129,9 +140,8 @@
 }
 
 .back h1 {
-  font-size: 50px;
-  line-height: 55px;
-  margin-bottom: 10px;
+  font-size: 40px;
+  line-height: 35px;
 }
 
 .back h1 span {
@@ -147,18 +157,16 @@
 }
 
 .back img {
-  width: 120px;
+  width: 100px;
 }
 
 .row {
   display: flex;
   align-items: center;
-  margin: 30px;
 }
 
 .col {
   flex: 1;
-  text-align: center;
   color: #555;
   font-size: 12px;
   position: relative;
@@ -182,9 +190,7 @@
   display: none;
 }
 
-.col p {
-  margin-top: 5px;
-}
+
 
 .back button {
   background: #7800ad;
@@ -198,9 +204,28 @@
   box-shadow: 0 8px 10px rgba(120, 0, 173, 0.3);
 }
 
+.back a:hover{
+  color: aqua;
+  transform: scale(1.15);
+}
+
+.back button:hover{
+  color: aqua;
+  transform: scale(1.1);
+}
+
+.back button:visited{
+  color: chocolate;
+}
+
+.back a:active{
+  color: chocolate;
+}
+
 .back a {
+  text-decoration: none;
   width: 40px;
-  height: 40px;
+  height: 20px;
   border-radius: 50%;
   box-shadow: 0 5px 10px rbga(0, 0, 0, 0.2);
   display: flex;
