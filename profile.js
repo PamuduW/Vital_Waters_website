@@ -90,36 +90,38 @@ function done() {
   document.querySelector(".current_stage_progress").style.display = "none";
 }
 
-function stageUpdate(){
+function stageUpdate() {
   document.querySelector(".current_stage_name").innerHTML = `${questionType[i]}`;
   document.querySelector(".profile_progress").innerHTML = `<div class="empty-progress-bar" style="width:80%">&nbsp;</div> <div class="progress-bar" style="width: ${i * 20}%;">${i * 25}%</div>`;
 }
 
-function gettingTheAnswer() {
-  let current_stage_progressbar = 0;
-  if (i == questionType.length && j == 0) {
-    alert("All done!!! Thank you...");
-    return;
-  } else if (document.querySelector("input").value == "") {
-    alert("Please fill the blank");
-    return;
-  } else if (j + 1 == questions[i].length) {
-    document.querySelector(".current_stage_name").innerHTML = `${questionType[i + 1]}`;
-    document.querySelector(".profile_progress").innerHTML = `<div class="empty-progress-bar" style="width:80%">&nbsp;</div> <div class="progress-bar" style="width: ${i + 1 * 20}%;">${i + 1 * 25}%</div>`;
-  }
-  answers[i][j] = document.querySelector("input").value;
-  dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
-  document.querySelector(`.set${i + 1}`).style.display = "block";
-  j += 1;
-  document.querySelector("input").value = "";
-  if (j == questions[i].length) {
+function dataUpdate() {
+  if (j + 1 == questions[i].length) {
     (i += 1), (j = 0);
+    stageUpdate();
+  } else {
+    j += 1;
   }
   if (i == questionType.length && j == 0) {
     done();
     return;
   }
   dataOut();
+}
+
+function gettingTheAnswer() {
+  if (i == questionType.length && j == 0) {
+    alert("All done!!! Thank you...");
+    return;
+  } else if (document.querySelector("input").value == "") {
+    alert("Please fill the blank");
+    return;
+  }
+  answers[i][j] = document.querySelector("input").value;
+  dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
+  document.querySelector(`.set${i + 1}`).style.display = "block";
+  document.querySelector("input").value = "";
+  dataUpdate();
 }
 
 function goingToPreviousQuestion() {
@@ -143,15 +145,5 @@ function skippingToNextQuestion() {
   answers[i][j] = "Skipped";
   document.querySelector(`.set${i + 1}`).style.display = "block";
   dataholder[i][j].innerHTML = `${questions[i][j]} - ${answers[i][j]}`;
-  if (j + 1 == questions[i].length) {
-    (i += 1), (j = 0);
-    stageUpdate();
-   } else {
-    j += 1;
-  }
-  if (i == questions.length && j == 0) {
-    done();
-    return;
-  }
-  dataOut();
+  dataUpdate();
 }
