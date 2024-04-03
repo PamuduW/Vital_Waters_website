@@ -2,7 +2,7 @@ let urlParams = new URLSearchParams(window.location.search);
 let totalPrice = urlParams.get("totalPrice");
 let cartDetails = urlParams.get("cartDetails");
 
-function totalPricetext() {
+function gettingCartDetails() {
   document.getElementById("total-price").innerHTML = `<b>${totalPrice}</b>`;
   let items = cartDetails.split("...");
   let cartDetailsElement = document.getElementById("cart-Details");

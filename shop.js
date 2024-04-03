@@ -1,10 +1,6 @@
-let iconCart = document.querySelector(".icon-cart");
-let closeCart = document.querySelector(".close");
 let body = document.querySelector("body");
-let listProductHTML = document.querySelector(".listProduct");
-let listCartHTML = document.querySelector(".listCart");
-let iconCartSpan = document.querySelector(".icon-cart span");
-
+let listOfProduct = document.querySelector(".listOfProduct");
+let listOfCartItems = document.querySelector(".listOfCartItems");
 let carts = [];
 let listProducts = [
   {
@@ -12,7 +8,6 @@ let listProducts = [
     name: "T-shirt 1",
     price: 100,
     color: ["black", "white"],
-    alt: "T-shirt 1",
     image: [
       "Pictures/Shop/T-shirt1_black.png",
       "Pictures/Shop/T-shirt1_white.png",
@@ -23,7 +18,6 @@ let listProducts = [
     name: "Coffee-Mug",
     price: 200,
     color: ["black", "white"],
-    alt: "Coffee-Mug",
     image: [
       "Pictures/Shop/coffee-mug_black.png",
       "Pictures/Shop/coffee-mug_white.png",
@@ -31,76 +25,64 @@ let listProducts = [
   },
 ];
 
-iconCart.addEventListener("click", () => {
+document.querySelector(".cart-icon").addEventListener("click", () => {
   body.classList.toggle("showCart");
 });
 
-closeCart.addEventListener("click", () => {
+document.querySelector(".closeButton").addEventListener("click", () => {
   body.classList.toggle("showCart");
 });
 
-const addDataToHTML = () => {
-  listProductHTML.innerHTML = "";
-  if (listProducts.length > 0) {
-    listProducts.forEach((product) => {
-      let colorChoiseOpt = 0;
-      let newProduct = document.createElement("div");
-      newProduct.classList.add("item");
-      newProduct.dataset.id = product.id;
-      newProduct.innerHTML = `
-        <img src="${product.image[colorChoiseOpt]}" alt="${product.alt}" width="181px" height="200px" class="item-image">
+const showingShopBody = () => {
+  listOfProduct.innerHTML = "";
+  listProducts.forEach((product) => {
+    let colorChoiseOpt = 0;
+    let newProductItem = document.createElement("div");
+    newProductItem.classList.add("currentProductItem");
+    newProductItem.dataset.id = product.id;
+    newProductItem.innerHTML = `
+        <img src = "${product.image[colorChoiseOpt]}" alt = "${product.name}" width = "200px" height = "285px" class = "currentProductItem-image">
         <h2>${product.name}</h2>
-        <div class="colorchoise">
-          <input class="color1" type="radio" name="${product.name}" id="0" value="0" checked>
-          <input class="color2" type="radio" name="${product.name}" id="1" value="1">
+        <div class = "colorchoise">
+          <input class = "color1" type = "radio" name = "${product.name}" id = "0" value = 0 checked>
+          <input class = "color2" type = "radio" name = "${product.name}" id = "1" value = 1>
         </div>
-        <div class="price">&#163; ${product.price}</div>
-        <button class="addCart">
+        <div class = "price">&#163; ${product.price}</div>
+        <button class = "addCart">
           Add to Cart
         </button>
         `;
-
-      const colorChoices = newProduct.querySelectorAll(".colorchoise input");
-      colorChoices.forEach((choice) => {
-        choice.addEventListener("change", (event) => {
-          const value = event.target.value;
-          const newImage = product.image[parseInt(value)];
-          newProduct.querySelector(".item-image").src = newImage;
-        });
+    newProductItem.querySelectorAll(".colorchoise input").forEach((choice) => {
+      choice.addEventListener("change", (event) => {
+        const value = event.target.value;
+        newProductItem.querySelector(".currentProductItem-image").src =
+          product.image[value];
       });
-
-      listProductHTML.appendChild(newProduct);
     });
-  }
+    listOfProduct.appendChild(newProductItem);
+  });
 };
 
-listProductHTML.addEventListener("click", (event) => {
-  let positionClick = event.target;
-  if (positionClick.classList.contains("addCart")) {
-    let product_id = positionClick.parentElement.dataset.id;
+listOfProduct.addEventListener("click", (event) => {
+  let clickedOn = event.target;
+  if (clickedOn.classList.contains("addCart")) {
+    let cartProductId = clickedOn.parentElement.dataset.id;
     let colorChoice = parseInt(
-      positionClick.parentElement.querySelector(".color2").checked ? "1" : "0"
+      clickedOn.parentElement.querySelector(".color2").checked ? "1" : "0"
     );
-    addToCart(product_id, colorChoice);
+    addToCart(cartProductId, colorChoice);
   }
 });
 
-const addToCart = (product_id, colorChoice) => {
+const addToCart = (cartProductId, colorChoice) => {
   let productInCart = carts.find(
     (value) =>
-      value.product_id == product_id && value.colorChoice == colorChoice
+      value.cartProductId == cartProductId && value.colorChoice == colorChoice
   );
-  if (carts.length <= 0) {
-    carts = [
-      {
-        product_id: product_id,
-        quantity: 1,
-        colorChoice: colorChoice,
-      },
-    ];
-  } else if (!productInCart) {
+  if (!productInCart) {
     carts.push({
-      product_id: product_id,
+      cartColorProductId: cartProductId + colorChoice,
+      cartProductId: cartProductId,
       quantity: 1,
       colorChoice: colorChoice,
     });
@@ -111,117 +93,109 @@ const addToCart = (product_id, colorChoice) => {
 };
 
 const addCartToHTML = () => {
-  listCartHTML.innerHTML = "";
-  let totalQuantity = 0;
-  let totalPrice = 0;
+  listOfCartItems.innerHTML = "";
+  let totalCartQuantity = 0;
+  let completeTotalPrice = 0;
   if (carts.length > 0) {
     carts.forEach((cart) => {
-      totalQuantity += cart.quantity;
-      let newCart = document.createElement("div");
-      newCart.classList.add("item");
-      newCart.dataset.id = cart.product_id;
-      let positionProduct = listProducts.findIndex(
-        (value) => value.id == cart.product_id
+      totalCartQuantity += cart.quantity;
+      let newCartItem = document.createElement("div");
+      newCartItem.classList.add("currentCartItem");
+      newCartItem.dataset.id = cart.cartColorProductId;
+      let productPosition = listProducts.findIndex(
+        (value) => value.id == cart.cartProductId
       );
-      let info = listProducts[positionProduct];
-      totalPrice += info.price * cart.quantity;
-      let selectedImage = info.image[cart.colorChoice];
-      newCart.innerHTML = `
-        <div class="image">
-          <img src="${selectedImage}" alt="${
-        info.alt
-      }" width="181px" height="200px">
+      let currentCartItemInfo = listProducts[productPosition];
+      completeTotalPrice += currentCartItemInfo.price * cart.quantity;
+      let selectedImage = currentCartItemInfo.image[cart.colorChoice];
+      newCartItem.innerHTML = `
+        <div class = "image">
+          <img src = "${selectedImage}" alt = "${
+        currentCartItemInfo.name
+      }" width = "200px" height = "285px">
         </div>
-        <div class="name">
-          ${info.name} <br> Color : ${info.color[cart.colorChoice]}
+        <div class = "name">
+          ${currentCartItemInfo.name} <br> 
+          Color : ${currentCartItemInfo.color[cart.colorChoice]}
         </div>
-        <div class="totalPrice">
-          £ ${info.price * cart.quantity}
+        <div class = "ItemQuantityPrice">
+          £ ${currentCartItemInfo.price * cart.quantity}
         </div>
-        <div class="quantity">
-          <span class="minus"><</span>
+        <div class = "quantity">
+          <span class = "minus"><</span>
           <span>${cart.quantity}</span>
-          <span class="plus">></span>
+          <span class = "plus">></span>
         </div>`;
-      listCartHTML.appendChild(newCart);
+      listOfCartItems.appendChild(newCartItem);
     });
   }
-  iconCartSpan.innerText = totalQuantity;
+  document.querySelector(".cart-icon span").innerText = totalCartQuantity;
   document.querySelector(
-    ".totalPriceFull"
-  ).innerHTML = `Total Price : £ ${totalPrice}`;
+    ".completeTotalPrice"
+  ).innerHTML = `Total Price : £ ${completeTotalPrice}`;
 };
 
-listCartHTML.addEventListener("click", (event) => {
-  let positionClick = event.target;
+listOfCartItems.addEventListener("click", (event) => {
+  let clickedOn = event.target;
   if (
-    positionClick.classList.contains("minus") ||
-    positionClick.classList.contains("plus")
+    clickedOn.classList.contains("minus") ||
+    clickedOn.classList.contains("plus")
   ) {
-    let product_id = positionClick.parentElement.parentElement.dataset.id;
+    let cartProductId = clickedOn.parentElement.parentElement.dataset.id;
     let type = "minus";
-    if (positionClick.classList.contains("plus")) {
+    if (clickedOn.classList.contains("plus")) {
       type = "plus";
     }
-    changeQuantity(product_id, type);
+    changeQuantity(cartProductId, type);
   }
 });
 
-const changeQuantity = (product_id, type, colorChoice) => {
+const changeQuantity = (cartProductId, type) => {
   let positionItemInCart = carts.findIndex(
-    (value) => value.product_id == product_id
+    (value) => value.cartColorProductId == cartProductId
   );
-  if (positionItemInCart >= 0) {
-    let product = carts[positionItemInCart];
-    switch (type) {
-      case "plus":
-        product.quantity += 1;
-        break;
-      case "minus":
-        let valueChange = product.quantity - 1;
-        if (valueChange > 0) {
-          product.quantity = valueChange;
-        } else {
-          carts.splice(positionItemInCart, 1);
-        }
-        break;
-    }
-
-    if (colorChoice !== undefined) {
-      product.colorChoice = colorChoice;
-    }
+  let product = carts[positionItemInCart];
+  switch (type) {
+    case "plus":
+      product.quantity += 1;
+      break;
+    case "minus":
+      let valueChange = product.quantity - 1;
+      if (valueChange > 0) {
+        product.quantity = valueChange;
+      } else {
+        carts.splice(positionItemInCart, 1);
+      }
+      break;
   }
   addCartToHTML();
 };
 
 function checkOut() {
   if (carts.length > 0) {
-    // Prepare an array of objects with item details
-    let cartDetails = carts.map((item) => {
-      let product = listProducts.find((p) => p.id == item.product_id);
-      if (item.colorChoice == 0) {
-        color = "Black";
+    let cartDetails = carts.map((cartItem) => {
+      let productDetails = listProducts.find(
+        (product) => product.id == cartItem.cartProductId
+      );
+      if (cartItem.colorChoice == 0) {
+        color = productDetails.color[0];
       } else {
-        color = "White";
+        color = productDetails.color[1];
       }
       return {
         start: "...",
-        name: "/" + product.name + "/",
-        price: "/" + product.price + "/",
-        quantity: "/" + item.quantity + "/",
+        name: "/" + productDetails.name + "/",
+        price: "/" + productDetails.price + "/",
+        quantity: "/" + cartItem.quantity + "/",
         colorChoice: "/" + color + "/",
       };
     });
-
-    // Convert the array to a JSON string and URL-encode it
-    let encodedCartDetails = encodeURIComponent(JSON.stringify(cartDetails));
-    let totalPrice = document
-      .querySelector(".totalPriceFull")
-      .innerText.replace("£", " £ ");
-    window.location.href = `checkout.html?totalPrice=${totalPrice}&cartDetails=${encodedCartDetails}`;
+    let cartDetailsJSON = encodeURIComponent(JSON.stringify(cartDetails));
+    let completeTotalPrice = document.querySelector(".completeTotalPrice").innerText;
+    window.location.href = `checkout.html?totalPrice=${completeTotalPrice}&cartDetails=${cartDetailsJSON}`;
   } else {
     alert("Please select an item first");
   }
 }
 
-addDataToHTML();
+showingShopBody();
